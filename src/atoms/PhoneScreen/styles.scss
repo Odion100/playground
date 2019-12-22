@@ -1,0 +1,13 @@
+.phone {
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 374px;
+  height: 721px;
+  margin: auto;
+  border-radius: 1rem;
+  border: 1px solid black;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
