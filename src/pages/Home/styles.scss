@@ -1,0 +1,26 @@
+@import "../../sass/bootstrap/functions";
+@import "../../sass/bootstrap/variables";
+@import "../../sass/bootstrap/mixins/breakpoints";
+
+.home {
+  padding: 5rem;
+
+  &__map {
+    width: 39px;
+    filter: invert(107%);
+    border: 2px solid #ff8f87;
+    border-radius: 21px;
+  }
+  &__phone1.phone {
+    width: fit-content;
+    margin: auto;
+    border-radius: 1.6rem;
+    border: 1px solid black;
+    overflow: hidden;
+  }
+}
+.navbar {
+  background: #82a2b1;
+  max-width: 372px;
+  /* display: flex; */
+}
