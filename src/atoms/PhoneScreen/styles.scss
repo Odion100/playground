@@ -2,12 +2,13 @@
   background-image: var(--bg-image);
   background-size: cover;
   background-repeat: no-repeat;
-  width: 374px;
+  width: 372px;
   height: 721px;
   margin: auto;
-  border-radius: 1rem;
-  border: 1px solid black;
+  border-radius: 8px;
+  border: 1px solid #0db713;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: 4px 3px 7px #7d7d7d;
 }
