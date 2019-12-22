@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.scss";
 import mapImage from "../../assets/map.png";
-import globeImage from "../../assets/globe.png";
+import BasketballGlobe from "../../atoms/BasketballGlobe/BasketballGlobe";
 const Home = props => {
   return (
     <section className="home">
@@ -10,7 +10,7 @@ const Home = props => {
           <div className="col-6">
             <div className="home__phone1 phone">
               <div className="navbar">
-                <img className="home__map" src={globeImage} alt="globe" />
+                <BasketballGlobe />
               </div>
               <img className="home__mobile-map" src={mapImage} alt="Map" />
             </div>
