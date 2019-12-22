@@ -1,9 +1,10 @@
 import React from "react";
 import "./styles.scss";
 import mapImage from "../../assets/map.png";
-import dmIcon from "../../assets/message.png";
+
 import BasketballGlobe from "../../atoms/BasketballGlobe/BasketballGlobe";
 import PhoneScreen from "../../atoms/PhoneScreen/PhoneScreen";
+import MessageIcon from "../../atoms/MessageIcon/MessageIcon";
 const Home = props => {
   return (
     <section className="home">
@@ -14,7 +15,7 @@ const Home = props => {
               <div className="navbar">
                 <BasketballGlobe />
                 <div className="dm-icon">
-                  <img src={dmIcon} alt="chat" />
+                  <MessageIcon />
                 </div>
               </div>
             </PhoneScreen>
