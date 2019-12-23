@@ -7,10 +7,10 @@ import profileIcon from "../../assets/profile.jpg";
 import BasketballGlobe from "../../atoms/BasketballGlobe/BasketballGlobe";
 import PhoneScreen from "../../atoms/PhoneScreen/PhoneScreen";
 import MessageIcon from "../../atoms/MessageIcon/MessageIcon";
+import CalloutIcon from "../../atoms/CalloutIcon/CalloutIcon";
 import Screen from "../../atoms/Screen/Screen";
 import NewsfeedIcon from "../../atoms/NewsfeedIcon/NewsfeedIcon";
 
-import NotificationBadge from "../../atoms/NotificationBadge/NotificationBadge";
 const Home = props => {
   return (
     <section className="home">
@@ -25,14 +25,7 @@ const Home = props => {
               </div>
               <Screen />
               <div className="bottom-panel">
-                <div className="callout-icon">
-                  <NotificationBadge count="20" />
-                  <img
-                    className="callout-icon__icon"
-                    src={calloutsIcon}
-                    alt="Callouts"
-                  />
-                </div>
+                <CalloutIcon />
                 <NewsfeedIcon />
                 <div className="profile-icon">
                   <div className="notification-badge">23</div>
