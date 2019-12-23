@@ -5,7 +5,7 @@ import "./styles.scss";
 
 const TopNav = props => {
   return (
-    <div className="top-nav">
+    <div className="top-nav phone-cover">
       <BasketballGlobe />
 
       <MessageIcon />

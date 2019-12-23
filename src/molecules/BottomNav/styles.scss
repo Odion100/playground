@@ -1,8 +1,15 @@
+@import "../../sass/abstracts/variables";
+
 .bottom-panel {
-  background: white;
-  padding: 19px 28px;
+  background: $mobile-cover-color;
+
+  padding: 22px 0;
   display: flex;
   & > * {
     margin: auto;
   }
+}
+
+.phone-cover {
+  background: #cdebf9;
 }

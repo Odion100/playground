@@ -1,18 +1,12 @@
+@import "../../sass/abstracts/variables";
+
 .top-nav {
   background: #9be296;
   background: #cdebf9;
   max-width: 372px;
   padding: 10px 14px;
-  background: white;
+  background: $mobile-cover-color;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-}
-.bottom-panel {
-  background: white;
-  padding: 19px 28px;
-  display: flex;
-  & > * {
-    margin: auto;
-  }
 }

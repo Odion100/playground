@@ -1,6 +1,6 @@
 import React from "react";
 import NotificationBadge from "../../atoms/NotificationBadge/NotificationBadge";
-import icon from "../../assets/callouts.jpeg";
+import icon from "../../assets/callout.png";
 import "./styles.scss";
 
 const CalloutIcon = ({ count }) => {

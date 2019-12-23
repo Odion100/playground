@@ -1,5 +1,5 @@
 import React from "react";
-import icon from "../../assets/profile.jpg";
+import icon from "../../assets/profile.png";
 import "./styles.scss";
 
 const ProfileIcon = props => {
