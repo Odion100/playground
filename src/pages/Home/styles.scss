@@ -30,33 +30,10 @@
     overflow: hidden;
   }
 }
-.navbar {
-  background: #9be296;
-  background: #cdebf9;
-  max-width: 372px;
-  padding: 10px 14px;
-  background: white;
-  cursor: pointer;
-}
 
 .dm-icon {
   & img {
     width: 36px;
     opacity: 0.6;
-  }
-}
-
-.bottom-panel {
-  background: white;
-  padding: 19px 28px;
-  display: flex;
-  & > * {
-    margin: auto;
-  }
-}
-
-.profile-icon {
-  &__icon {
-    width: 42px;
   }
 }

@@ -10,6 +10,9 @@ import MessageIcon from "../../atoms/MessageIcon/MessageIcon";
 import CalloutIcon from "../../atoms/CalloutIcon/CalloutIcon";
 import Screen from "../../atoms/Screen/Screen";
 import NewsfeedIcon from "../../atoms/NewsfeedIcon/NewsfeedIcon";
+import ProfileIcon from "../../atoms/ProfileIcon/ProfileIcon";
+import TopNav from "../../molecules/TopNav/TopNav";
+import BottomNav from "../../molecules/BottomNav/BottomNav";
 
 const Home = props => {
   return (
@@ -18,62 +21,16 @@ const Home = props => {
         <div className="row justify-content-center">
           <div className="col-6">
             <PhoneScreen bgImage={mapImage}>
-              <div className="navbar">
-                <BasketballGlobe />
-
-                <MessageIcon />
-              </div>
+              <TopNav />
               <Screen />
-              <div className="bottom-panel">
-                <CalloutIcon />
-                <NewsfeedIcon />
-                <div className="profile-icon">
-                  <div className="notification-badge">23</div>
-                  <img
-                    className="profile-icon__icon"
-                    src={profileIcon}
-                    alt="profile"
-                  />
-                </div>
-              </div>
+              <BottomNav />
             </PhoneScreen>
           </div>
           <div className="col-6">
             <PhoneScreen bgImage={mapImage}>
-              <div className="navbar">
-                <BasketballGlobe />
-                <div className="dm-icon">
-                  <MessageIcon />
-                </div>
-              </div>
-
-              <div className="bottom-panel">
-                <div className="callout-icon">
-                  <div className="notification-badge">23</div>
-                  <img
-                    className="callout-icon__icon"
-                    src={calloutsIcon}
-                    alt="Callouts"
-                  />
-                </div>
-                <div className="newsfeed-icon">
-                  <div className="notification-badge">23</div>
-                  <img
-                    className="newsfeed-icon__icon"
-                    src={newsfeedIcon}
-                    alt="newsfeed"
-                  />
-                </div>
-                <div className="profile-icon">
-                  <div className="notification-badge">23</div>
-                  <img
-                    className="profile-icon__icon"
-                    src={profileIcon}
-                    alt="profile"
-                  />
-                </div>
-              </div>
-              <div className="screen"></div>
+              <TopNav />
+              <BottomNav />
+              <Screen />
             </PhoneScreen>
           </div>
         </div>
