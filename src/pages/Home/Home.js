@@ -7,8 +7,10 @@ import profileIcon from "../../assets/profile.jpg";
 import BasketballGlobe from "../../atoms/BasketballGlobe/BasketballGlobe";
 import PhoneScreen from "../../atoms/PhoneScreen/PhoneScreen";
 import MessageIcon from "../../atoms/MessageIcon/MessageIcon";
-import NotificationBadge from "../../atoms/NotificationBadge/NotificationBadge";
 import Screen from "../../atoms/Screen/Screen";
+import NewsfeedIcon from "../../atoms/NewsfeedIcon/NewsfeedIcon";
+
+import NotificationBadge from "../../atoms/NotificationBadge/NotificationBadge";
 const Home = props => {
   return (
     <section className="home">
@@ -31,14 +33,7 @@ const Home = props => {
                     alt="Callouts"
                   />
                 </div>
-                <div className="newsfeed-icon">
-                  <div className="notification-badge">23</div>
-                  <img
-                    className="newsfeed-icon__icon"
-                    src={newsfeedIcon}
-                    alt="newsfeed"
-                  />
-                </div>
+                <NewsfeedIcon />
                 <div className="profile-icon">
                   <div className="notification-badge">23</div>
                   <img
