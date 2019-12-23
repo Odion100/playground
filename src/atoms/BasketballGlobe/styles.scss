@@ -1,6 +1,11 @@
 .basketball-globe {
   position: relative;
-
+  cursor: pointer;
+  background: #ffffff;
+  border-radius: 161px;
+  &:hover {
+    background: wheat;
+  }
   &__globe {
     width: 39px;
     filter: invert(107%);
