@@ -3,6 +3,7 @@ import "./styles.scss";
 import mapImage from "../../assets/map.png";
 import calloutsIcon from "../../assets/callouts.jpeg";
 import newsfeedIcon from "../../assets/newsfeed.png";
+import profileIcon from "../../assets/profile.jpg";
 import BasketballGlobe from "../../atoms/BasketballGlobe/BasketballGlobe";
 import PhoneScreen from "../../atoms/PhoneScreen/PhoneScreen";
 import MessageIcon from "../../atoms/MessageIcon/MessageIcon";
@@ -20,16 +21,7 @@ const Home = props => {
                   <MessageIcon />
                 </div>
               </div>
-            </PhoneScreen>
-          </div>
-          <div className="col-6">
-            <PhoneScreen bgImage={mapImage}>
-              <div className="navbar">
-                <BasketballGlobe />
-              </div>
-              <div className="screen">
-                <div>This is the screen</div>
-              </div>
+              <div className="screen"></div>
               <div className="bottom-panel">
                 <div className="callout-icon">
                   <div className="notification-badge">23</div>
@@ -44,10 +36,56 @@ const Home = props => {
                   <img
                     className="newsfeed-icon__icon"
                     src={newsfeedIcon}
-                    alt="Callouts"
+                    alt="newsfeed"
+                  />
+                </div>
+                <div className="profile-icon">
+                  <div className="notification-badge">23</div>
+                  <img
+                    className="profile-icon__icon"
+                    src={profileIcon}
+                    alt="profile"
                   />
                 </div>
               </div>
+            </PhoneScreen>
+          </div>
+          <div className="col-6">
+            <PhoneScreen bgImage={mapImage}>
+              <div className="navbar">
+                <BasketballGlobe />
+                <div className="dm-icon">
+                  <MessageIcon />
+                </div>
+              </div>
+
+              <div className="bottom-panel">
+                <div className="callout-icon">
+                  <div className="notification-badge">23</div>
+                  <img
+                    className="callout-icon__icon"
+                    src={calloutsIcon}
+                    alt="Callouts"
+                  />
+                </div>
+                <div className="newsfeed-icon">
+                  <div className="notification-badge">23</div>
+                  <img
+                    className="newsfeed-icon__icon"
+                    src={newsfeedIcon}
+                    alt="newsfeed"
+                  />
+                </div>
+                <div className="profile-icon">
+                  <div className="notification-badge">23</div>
+                  <img
+                    className="profile-icon__icon"
+                    src={profileIcon}
+                    alt="profile"
+                  />
+                </div>
+              </div>
+              <div className="screen"></div>
             </PhoneScreen>
           </div>
         </div>
