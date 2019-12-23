@@ -8,6 +8,7 @@ import BasketballGlobe from "../../atoms/BasketballGlobe/BasketballGlobe";
 import PhoneScreen from "../../atoms/PhoneScreen/PhoneScreen";
 import MessageIcon from "../../atoms/MessageIcon/MessageIcon";
 import NotificationBadge from "../../atoms/NotificationBadge/NotificationBadge";
+import Screen from "../../atoms/Screen/Screen";
 const Home = props => {
   return (
     <section className="home">
@@ -20,7 +21,7 @@ const Home = props => {
 
                 <MessageIcon />
               </div>
-              <div className="screen"></div>
+              <Screen />
               <div className="bottom-panel">
                 <div className="callout-icon">
                   <NotificationBadge count="20" />
