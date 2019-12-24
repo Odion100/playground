@@ -1,6 +1,7 @@
 import React from "react";
 import ball from "../../assets/bball.png";
 import globe from "../../assets/globe.png";
+
 import "./styles.scss";
 
 const BasketballGlobe = props => {

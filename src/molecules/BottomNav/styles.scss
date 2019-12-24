@@ -1,16 +1,10 @@
 @import "../../sass/abstracts/variables";
 
 .bottom-panel {
-  background: $mobile-cover-color;
-
   padding: 22px 0;
   display: flex;
   & > * {
     margin: auto;
     cursor: pointer;
   }
-}
-
-.phone-cover {
-  background: #cdebf9;
 }

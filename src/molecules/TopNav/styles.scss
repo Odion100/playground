@@ -1,12 +1,18 @@
 @import "../../sass/abstracts/variables";
 
 .top-nav {
-  background: #9be296;
-  background: #cdebf9;
   max-width: 372px;
   padding: 10px 14px;
-  background: $mobile-cover-color;
+
   cursor: pointer;
   display: flex;
   justify-content: space-between;
+}
+
+img.logo {
+  margin: 9px 7px 0px 7px;
+  width: 52px;
+  position: relative;
+  left: -94px;
+  /* filter: invert(1); */
 }

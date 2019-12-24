@@ -1,18 +1,11 @@
 import React from "react";
 import "./styles.scss";
 import mapImage from "../../assets/map.png";
-import calloutsIcon from "../../assets/callouts.jpeg";
-import newsfeedIcon from "../../assets/newsfeed.png";
-import profileIcon from "../../assets/profile.jpg";
-import BasketballGlobe from "../../atoms/BasketballGlobe/BasketballGlobe";
 import PhoneScreen from "../../atoms/PhoneScreen/PhoneScreen";
-import MessageIcon from "../../atoms/MessageIcon/MessageIcon";
-import CalloutIcon from "../../atoms/CalloutIcon/CalloutIcon";
 import Screen from "../../atoms/Screen/Screen";
-import NewsfeedIcon from "../../atoms/NewsfeedIcon/NewsfeedIcon";
-import ProfileIcon from "../../atoms/ProfileIcon/ProfileIcon";
 import TopNav from "../../molecules/TopNav/TopNav";
 import BottomNav from "../../molecules/BottomNav/BottomNav";
+import CourtMarker from "../../atoms/CourtMarker/CourtMarker";
 
 const Home = props => {
   return (
@@ -22,7 +15,7 @@ const Home = props => {
           <div className="col-6">
             <PhoneScreen bgImage={mapImage}>
               <TopNav />
-              <Screen />
+              <Screen></Screen>
               <BottomNav />
             </PhoneScreen>
           </div>
@@ -30,7 +23,7 @@ const Home = props => {
             <PhoneScreen bgImage={mapImage}>
               <TopNav />
               <BottomNav />
-              <Screen />
+              <Screen></Screen>
             </PhoneScreen>
           </div>
         </div>
