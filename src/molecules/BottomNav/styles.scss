@@ -1,10 +1,44 @@
 @import "../../sass/abstracts/variables";
 
-.bottom-panel {
-  padding: 22px 0;
+.bottom-nav {
+  padding: 17px 0;
   display: flex;
-  & > * {
-    margin: auto;
-    cursor: pointer;
+  justify-content: space-evenly;
+  align-items: center;
+  &__newsfeed-icon {
+    background: #65a3da;
+
+    padding: 9px;
+    border-radius: 53px;
+    & img {
+      width: 38px;
+      background: white;
+    }
+  }
+
+  &__events-icon {
+    & img {
+      width: 43px;
+    }
+  }
+
+  &__callout-icon {
+    position: relative;
+
+    & img {
+      height: 43px;
+    }
+  }
+
+  &__profile-icon {
+    & img {
+      width: 42px;
+    }
+  }
+
+  &__tools-icon {
+    & img {
+      width: 24px;
+    }
   }
 }

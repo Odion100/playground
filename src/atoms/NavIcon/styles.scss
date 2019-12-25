@@ -1,0 +1,8 @@
+.nav-icon {
+  position: relative;
+  border-radius: 100px;
+  padding: 5px;
+  &__selected {
+    background: #65a3da;
+  }
+}

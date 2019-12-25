@@ -17,4 +17,11 @@
   z-index: 4;
   background: #f44336;
   border-radius: 131px;
+
+  &__visible {
+    visibility: visible;
+  }
+  &__hidden {
+    visibility: hidden;
+  }
 }
