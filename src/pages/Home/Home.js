@@ -12,17 +12,17 @@ const Home = props => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-6">
-            <PhoneCover bgImage={mapImage}>
+            <PhoneCover>
               <TopNav />
-              <Screen></Screen>
+              <Screen bgImage={mapImage}></Screen>
               <BottomNav />
             </PhoneCover>
           </div>
           <div className="col-6">
-            <PhoneCover bgImage={mapImage}>
+            <PhoneCover>
               <TopNav />
               <BottomNav />
-              <Screen></Screen>
+              <Screen bgImage={mapImage}></Screen>
             </PhoneCover>
           </div>
         </div>
