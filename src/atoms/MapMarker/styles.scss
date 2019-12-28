@@ -1,0 +1,17 @@
+.map-marker {
+  &__icon {
+    overflow: hidden;
+    width: 76%;
+    height: 73%;
+    position: absolute;
+    top: 0px;
+    left: 12%;
+    text-align: center;
+    /* background: #273b7a; */
+    border-radius: 100px;
+    margin: auto;
+    & img {
+      width: 100%;
+    }
+  }
+}
