@@ -8,6 +8,7 @@ import TopNav from "../../molecules/TopNav/TopNav";
 import BottomNav from "../../molecules/BottomNav/BottomNav";
 import hoopIcon from "../../assets/hoop.svg";
 import orangeBall from "../../assets/orange basketball.png";
+import blackBall from "../../assets/basketball-black.png";
 
 const Home = props => {
   return (
@@ -29,6 +30,13 @@ const Home = props => {
                   posY={30}
                   bgOpacity={0.2}
                   bgColor="#ff7d00"
+                />
+                <MapMarker
+                  iconImage={blackBall}
+                  posX={60}
+                  posY={20}
+                  bgOpacity={0.2}
+                  bgColor="black"
                 />
               </Screen>
               <BottomNav />
