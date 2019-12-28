@@ -20,23 +20,26 @@ const Home = props => {
               <TopNav />
               <Screen bgImage={mapImage}>
                 <MapMarker
-                  iconImage={hoopIcon}
-                  bgColor="#273b7a"
-                  bgOpacity={0.9}
-                />
-                <MapMarker
+                  markerSize={65}
                   iconImage={orangeBall}
-                  posX={30}
-                  posY={30}
                   bgOpacity={0.2}
                   bgColor="#ff7d00"
                 />
                 <MapMarker
-                  iconImage={blackBall}
+                  markerSize={65}
+                  iconImage={orangeBall}
+                  bgOpacity={0.2}
+                  bgColor="#ff7d00"
+                  posX={30}
+                  posY={30}
+                />
+                <MapMarker
+                  markerSize={65}
+                  iconImage={orangeBall}
+                  bgOpacity={0.2}
+                  bgColor="#ff7d00"
                   posX={60}
                   posY={20}
-                  bgOpacity={0.2}
-                  bgColor="black"
                 />
               </Screen>
               <BottomNav />
@@ -48,6 +51,7 @@ const Home = props => {
               <BottomNav />
               <Screen bgImage={mapImage}>
                 <MapMarker
+                  markerSize={65}
                   iconImage={hoopIcon}
                   bgColor="#273b7a"
                   bgOpacity={1}
@@ -58,6 +62,14 @@ const Home = props => {
                   posY={30}
                   bgOpacity={0.2}
                   bgColor="#ff7d00"
+                />
+                <MapMarker
+                  markerSize={65}
+                  iconImage={blackBall}
+                  posX={60}
+                  posY={20}
+                  bgOpacity={0.2}
+                  bgColor="black"
                 />
               </Screen>
             </PhoneCover>
