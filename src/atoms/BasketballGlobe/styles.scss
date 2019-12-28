@@ -6,16 +6,11 @@
   &:hover {
     background: #70d4a1;
   }
-  &__globe {
-    width: 39px;
-    filter: invert(107%);
-    border: 2px solid #424242;
-    border-radius: 21px;
-  }
+ 
   &__ball {
     position: absolute;
     z-index: 1;
-    width: 39px;
+    width: 40px;
     top: 0;
     left: 0px;
     filter: brightness(0.5);

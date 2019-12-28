@@ -8,14 +8,38 @@ import toolsIcon from "../../assets/tools.png";
 
 import "./styles.scss";
 
-const BottomNav = props => {
+const BottomNav = ({ onSwitch }) => {
+  const switchSelection = () => {};
+
   return (
     <div className="bottom-nav phone-cover">
-      <NavIcon iconImage={calloutIcon} iconClass="bottom-nav__callout-icon" />
-      <NavIcon iconImage={newsfeedIcon} iconClass="bottom-nav__newsfeed-icon" />
-      <NavIcon iconImage={profileIcon} iconClass="bottom-nav__profile-icon" />
-      <NavIcon iconImage={eventsIcon} iconClass="bottom-nav__events-icon" />
-      <NavIcon iconImage={toolsIcon} iconClass="bottom-nav__tools-icon" />
+      <NavIcon
+        iconImage={calloutIcon}
+        iconClass="bottom-nav__callout-icon"
+        isSelected={true}
+        notifications={26}
+      />
+      <NavIcon
+        iconImage={newsfeedIcon}
+        iconClass="bottom-nav__newsfeed-icon"
+        isSelected={false}
+      />
+      <NavIcon
+        iconImage={profileIcon}
+        iconClass="bottom-nav__profile-icon"
+        isSelected={false}
+      />
+      <NavIcon
+        iconImage={eventsIcon}
+        iconClass="bottom-nav__events-icon"
+        isSelected={false}
+        notifications={6}
+      />
+      <NavIcon
+        iconImage={toolsIcon}
+        iconClass="bottom-nav__tools-icon"
+        isSelected={false}
+      />
     </div>
   );
 };

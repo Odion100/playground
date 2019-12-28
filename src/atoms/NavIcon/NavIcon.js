@@ -11,7 +11,7 @@ const NewsfeedIcon = ({
 }) => {
   return (
     <div
-      className={`nav-icon nav-cion__${
+      className={`nav-icon nav-icon__${
         isSelected ? "selected" : ""
       } ${iconClass}`}
     >
