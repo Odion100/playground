@@ -14,4 +14,9 @@
       width: 100%;
     }
   }
+
+  & svg {
+    width: var(--marker-size);
+    height: var(--marker-size);
+  }
 }

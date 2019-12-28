@@ -1,23 +1,33 @@
 import React from "react";
 import "./styles.scss";
-const MapMarker = ({ children }) => {
+const MapMarker = ({
+  iconImage,
+  bgColor,
+  bgOpacity,
+  markerSize,
+  posY,
+  posX
+}) => {
   return (
     <div
       className="map-marker"
-      style={{ position: "absolute", top: "50%", left: "50%" }}
+      style={{
+        "--marker-size": `${markerSize ? markerSize + "px" : "75px"}`,
+        position: "absolute",
+        top: `${posY ? posY + "%" : "50%"}`,
+        left: `${posX ? posX + "%" : "50%"}`
+      }}
     >
       <div className="map-marker__container">
         <svg
           version="1.0"
           xmlns="http://www.w3.org/2000/svg"
-          width="75px"
-          height="75px"
           viewBox="0 0 512.000000 512.000000"
         >
           <g
             transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-            fill="white"
-            fillOpacity="0.7"
+            fill={bgColor || "white"}
+            fillOpacity={bgOpacity || "0.6"}
             stroke="#212529"
             strokeWidth="50"
           >
@@ -34,7 +44,9 @@ const MapMarker = ({ children }) => {
             />
           </g>
         </svg>
-        <div className="map-marker__icon">{children}</div>
+        <div className="map-marker__icon">
+          <img src={iconImage} alt="Marker Icon" />
+        </div>
       </div>
     </div>
   );
