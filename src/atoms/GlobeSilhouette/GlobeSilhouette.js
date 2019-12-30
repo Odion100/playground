@@ -7,8 +7,8 @@ const GlobeSilhouete = props => {
       version="1.0"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 960.000000 980.000000"
-      width={40}
-      height={40}
+      width={46}
+      height={46}
     >
       <g
         transform="translate(0.000000,980.000000) scale(0.100000,-0.100000)"
