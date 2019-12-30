@@ -14,4 +14,10 @@
   background: #cdebf9;
   background: #95ddff;
   background: white;
+  &--bottom {
+    border-top: 1px solid #c1c1c1;
+  }
+  &--top {
+    border-bottom: 1px solid #c1c1c1;
+  }
 }

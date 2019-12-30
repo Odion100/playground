@@ -29,7 +29,7 @@ const MapMarker = ({
             fill={bgColor || "white"}
             fillOpacity={bgOpacity || "0.6"}
             stroke="#212529"
-            strokeWidth="50"
+            strokeWidth="0"
           >
             <path
               d="M2270 5104 c-839 -128 -1492 -786 -1615 -1627 -20 -139 -20 -409 -1
@@ -43,6 +43,16 @@ const MapMarker = ({
 544 -14z"
             />
           </g>
+          <ellipse
+            stroke="null"
+            ry="173"
+            rx="173"
+            id="svg_3"
+            cy="193"
+            cx="257"
+            fill={null || "white"}
+            fillOpacity={null || "0.8"}
+          />
         </svg>
         <div className="map-marker__icon">
           <img src={iconImage} alt="Marker Icon" />

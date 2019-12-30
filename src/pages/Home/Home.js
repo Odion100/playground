@@ -9,7 +9,7 @@ import BottomNav from "../../molecules/BottomNav/BottomNav";
 import hoopIcon from "../../assets/hoop.svg";
 import orangeBall from "../../assets/orange basketball.png";
 import blackBall from "../../assets/basketball-black.png";
-
+import CourtActivityCard from "../../organisms/CourtActivityCard/CourtActivityCard";
 const Home = props => {
   return (
     <section className="home">
@@ -17,41 +17,43 @@ const Home = props => {
         <div className="row justify-content-center">
           <div className="col-6">
             <PhoneCover>
-              <TopNav />
+              <TopNav className="phone-cover--top" />
               <Screen bgImage={mapImage}>
+                <CourtActivityCard />
                 <MapMarker
-                  markerSize={65}
-                  iconImage={orangeBall}
-                  bgOpacity={0.2}
-                  bgColor="#ff7d00"
+                  markerSize={75}
+                  iconImage={blackBall}
+                  bgOpacity={0.5}
+                  bgColor="black"
                 />
                 <MapMarker
-                  markerSize={65}
-                  iconImage={orangeBall}
-                  bgOpacity={0.2}
-                  bgColor="#ff7d00"
+                  markerSize={75}
+                  iconImage={hoopIcon}
+                  bgColor="#273b7a"
+                  bgOpacity={1}
                   posX={30}
                   posY={30}
                 />
                 <MapMarker
-                  markerSize={65}
+                  markerSize={75}
                   iconImage={orangeBall}
-                  bgOpacity={0.2}
+                  bgOpacity={0.5}
                   bgColor="#ff7d00"
                   posX={60}
                   posY={20}
                 />
               </Screen>
-              <BottomNav />
+              <BottomNav className="phone-cover--bottom" />
             </PhoneCover>
           </div>
           <div className="col-6">
             <PhoneCover>
               <TopNav />
-              <BottomNav />
+              <BottomNav className="phone-cover--top" />
               <Screen bgImage={mapImage}>
+                <CourtActivityCard />
                 <MapMarker
-                  markerSize={65}
+                  markerSize={75}
                   iconImage={hoopIcon}
                   bgColor="#273b7a"
                   bgOpacity={1}
@@ -60,15 +62,15 @@ const Home = props => {
                   iconImage={orangeBall}
                   posX={30}
                   posY={30}
-                  bgOpacity={0.2}
+                  bgOpacity={0.5}
                   bgColor="#ff7d00"
                 />
                 <MapMarker
-                  markerSize={65}
+                  markerSize={75}
                   iconImage={blackBall}
                   posX={60}
                   posY={20}
-                  bgOpacity={0.2}
+                  bgOpacity={0.5}
                   bgColor="black"
                 />
               </Screen>

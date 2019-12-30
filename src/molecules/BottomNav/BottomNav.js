@@ -8,11 +8,11 @@ import toolsIcon from "../../assets/tools.png";
 
 import "./styles.scss";
 
-const BottomNav = ({ onSwitch }) => {
+const BottomNav = ({ onSwitch, className }) => {
   const switchSelection = () => {};
 
   return (
-    <div className="bottom-nav phone-cover">
+    <div className={`bottom-nav phone-cover ${className}`}>
       <NavIcon
         iconImage={calloutIcon}
         iconClass="bottom-nav__callout-icon"
