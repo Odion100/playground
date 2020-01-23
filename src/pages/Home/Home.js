@@ -19,6 +19,7 @@ const Home = props => {
             <PhoneCover>
               <TopNav className="phone-cover--top" />
               <Screen bgImage={mapImage}>
+                <CourtActivityCard />
                 <MapMarker
                   markerSize={75}
                   iconImage={blackBall}
@@ -50,6 +51,7 @@ const Home = props => {
               <TopNav />
               <BottomNav className="phone-cover--top" />
               <Screen bgImage={mapImage}>
+                <CourtActivityCard />
                 <MapMarker
                   markerSize={75}
                   iconImage={hoopIcon}
