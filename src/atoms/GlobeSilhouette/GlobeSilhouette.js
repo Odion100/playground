@@ -12,7 +12,7 @@ const GlobeSilhouete = props => {
     >
       <g
         transform="translate(0.000000,980.000000) scale(0.100000,-0.100000)"
-        fill="white"
+        fill="#ffa864"
         stroke="grey"
         strokeWidth={10}
       >
