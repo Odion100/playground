@@ -84,6 +84,7 @@ describe("buAPI.Users.updateField(options)", () => {
     expect(res.updatedUser).to.have.property("age", age);
     expect(res.updatedUser).to.have.property("gender", gender);
     expect(res.updatedUser).to.have.property("profile_image", profile_image);
+    expect(res.updatedUser).to.have.property("account_status", "active");
     expect(res.updatedUser)
       .to.have.property("primary_zipcodes")
       .that.deep.equals(primary_zipcodes);
@@ -101,5 +102,17 @@ describe("buAPI.Users.setAccountStatus(options)", () => {
     });
     //console.log("Users.setAccountStatus---->", res);
     expect(res).to.be.an("object");
+    expect(res).to.have.property("status", 200);
+    expect(res)
+      .to.have.property("updatedUser")
+      .that.is.an("object");
+    expect(res.updatedUser).to.have.property("first_name");
+    expect(res.updatedUser).to.have.property("last_name");
+    expect(res.updatedUser).to.have.property("age");
+    expect(res.updatedUser).to.have.property("gender");
+    expect(res.updatedUser).to.have.property("profile_image");
+    expect(res.updatedUser).to.have.property("primary_zipcodes");
+    expect(res.updatedUser).to.have.property("account_status", "archived");
+    expect(res.updatedUser).to.have.property("tag");
   });
 });
