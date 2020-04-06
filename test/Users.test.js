@@ -3,7 +3,7 @@ const { Client } = require("tasksjs-react-client");
 const route = "bu/api";
 const port = 7899;
 const url = `http://localhost:${port}/${route}`;
-const email = `odzysofreezy${parseInt(Math.random() * 100)}@gmail.com`;
+const email = `odzysofreezy${parseInt(Math.random() * 1000)}@gmail.com`;
 const password = "passthesenutson";
 
 describe("buAPI.Users.add(options)", () => {
@@ -61,7 +61,7 @@ describe("buAPI.Users.updateField(options)", () => {
       .to.have.property("created_date")
       .that.is.a("string");
 
-    const res = await Users.update({
+    const res = await Users.updateFields({
       fields: {
         first_name,
         last_name,

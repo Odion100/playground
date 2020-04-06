@@ -82,7 +82,7 @@ describe("buAPI.Users.updateField(options)", () => {
 
     const res = await Tournaments.updateFields({
       id: tournaments[0]._id,
-      updatedFields: {
+      fields: {
         profile_image,
         banner_image,
         secondary_admins,

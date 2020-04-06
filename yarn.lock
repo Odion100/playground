@@ -8521,6 +8521,23 @@ shortid@^2.2.14:
   dependencies:
     nanoid "^2.1.0"
 
+sht-tasks@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/sht-tasks/-/sht-tasks-2.0.6.tgz#6be0853a385eb37d44cfc8bdf5741a1c5036c95c"
+  integrity sha512-330F4T1cj7bCydHTBGO5wwMEujyPMFtBMDMySVw7nwh6qRv6amrW1S2fKM61bS+RfpzCTPXBxb51lCqNqc4mTQ==
+  dependencies:
+    body-parser "^1.18.3"
+    chai-as-promised "^7.1.1"
+    express "^4.16.4"
+    jest "^24.9.0"
+    mime "^2.4.0"
+    multer "^1.4.2"
+    multitaskhandler "^1.4.1"
+    obj-handler "^1.2.1"
+    request "^2.88.0"
+    shortid "^2.2.14"
+    socket.io "^2.2.0"
+
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
@@ -9085,10 +9102,10 @@ tar@^4:
     safe-buffer "^5.1.2"
     yallist "^3.0.3"
 
-tasksjs-react-client@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/tasksjs-react-client/-/tasksjs-react-client-1.0.3.tgz#e817992eab1f7d68bbeb3b78e6ea5f86cc7dd216"
-  integrity sha512-WO7QKyjaRGSD3IxQjTjPu9H4LA5lxIkHFMdSt8slYnGaV84LibZ5APvliEjFCigTxXuvR8WzYR51aWpUOMeu2w==
+tasksjs-react-client@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/tasksjs-react-client/-/tasksjs-react-client-1.0.4.tgz#58e31f61cebf75ff7c2bb4ed26e5c6f5adff1a50"
+  integrity sha512-PrPS1P7IIQcTQytZc4cPWfhfSB0YoALBB4Mx7N4adAIrohNTQV78gWkVQS3d9/rFwmjodMYjkyXeCwULrnZKBg==
   dependencies:
     body-parser "^1.18.3"
     chai-as-promised "^7.1.1"

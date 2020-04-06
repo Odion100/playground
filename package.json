@@ -13,7 +13,8 @@
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
-    "tasksjs-react-client": "^1.0.3"
+    "sht-tasks": "^2.0.6",
+    "tasksjs-react-client": "^1.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
