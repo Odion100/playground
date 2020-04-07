@@ -139,3 +139,18 @@ describe("buAPI.Tournaments.publish(options)", () => {
     expect(res.updatedTournament).to.have.property("status", "published");
   });
 });
+
+describe("buAPI.Tournaments.cancel(options)", () => {
+  it("should be able to cancel a tournament giving its id", async () => {
+    const { Tournaments } = await Client.loadService(url);
+    const { tournaments } = await Tournaments.get({ name });
+    const id = tournaments[0]._id;
+    const res = await Tournaments.cancel({ id });
+    console.log(res);
+    expect(res)
+      .to.be.an("object")
+      .that.has.keys("updatedTournament", "status");
+    expect(res.status).to.equal(200);
+    expect(res.updatedTournament).to.have.property("status", "unpublished");
+  });
+});
