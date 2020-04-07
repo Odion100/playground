@@ -124,3 +124,18 @@ describe("buAPI.Users.updateField(options)", () => {
     expect(res.updatedTournament).to.have.property("end_date", end_date);
   });
 });
+
+describe("buAPI.Tournaments.publish(options)", () => {
+  it("should be able to successfully update a tournament's status to 'published'", async () => {
+    const { Tournaments } = await Client.loadService(url);
+    const { tournaments } = await Tournaments.get({ name });
+    const id = tournaments[0];
+    const res = await Tournaments.publish({ id });
+    //console.log(res);
+    expect(res)
+      .to.be.an("object")
+      .that.has.keys("updatedTournament", "status");
+    expect(res.status).to.equal(200);
+    expect(res.updatedTournament).to.have.property("status", "published");
+  });
+});
