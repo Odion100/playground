@@ -75,11 +75,35 @@ describe("buAPI.Invites.get(options)", () => {
   });
 });
 
+describe("buAPI.Invites.markAsViewed(options)", () => {
+  it("should be able to update invites status, response_message, and response_date", async () => {
+    const { Invites } = await Client.loadService(url);
+    const id = _id;
+
+    const res = await Invites.markAsViewed({ id });
+    //console.log(res);
+    expect(res)
+      .to.be.an("object")
+      .that.has.keys("status", "updatedInvite");
+    expect(res.status).to.equals(200);
+    expect(res.updatedInvite).to.be.an("object");
+    expect(res.updatedInvite)
+      .to.have.property("created_date")
+      .that.is.a("string");
+    expect(res.updatedInvite).to.have.property("source_type", "tournament");
+    expect(res.updatedInvite).to.have.property("target_type", "team");
+    expect(res.updatedInvite).to.have.property("target", target);
+    expect(res.updatedInvite).to.have.property("source", source);
+    expect(res.updatedInvite)
+      .to.have.property("viewed_date")
+      .that.is.a("string");
+  });
+});
+
 describe("buAPI.Invites.sendResponse(options)", () => {
   it("should be able to update invites status, response_message, and response_date", async () => {
     const { Invites } = await Client.loadService(url);
-    const { invites } = await Invites.get({ id: _id });
-    const id = invites[0]._id;
+    const id = _id;
     const status = ["rejected", "accepted"][parseInt(Math.random() * 1000) % 2];
     const message = `I'm honored to have ${status} your offer`;
 
