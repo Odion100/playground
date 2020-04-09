@@ -6,6 +6,7 @@ const url = `http://localhost:${port}/${route}`;
 
 const target = "5e8cc4359180142b0605416f";
 const source = "5e8c95739136f2127da83417";
+let _id = "";
 describe("buAPI.Invites.add(options)", () => {
   it("should be able to successfully create an invite", async () => {
     const { Invites } = await Client.loadService(url);
@@ -31,12 +32,13 @@ describe("buAPI.Invites.add(options)", () => {
     expect(res.newInvite).to.have.property("target_type", "team");
     expect(res.newInvite).to.have.property("target", target);
     expect(res.newInvite).to.have.property("source", source);
+    _id = res.newInvite._id;
   });
 });
 describe("buAPI.Invites.get(options)", () => {
   it("should be able to succesfully retrieve an invite using 'source', 'target' or 'id'", async () => {
     const { Invites } = await Client.loadService(url);
-    const res = await Invites.get({ source, target });
+    const res = await Invites.get({ source, target, id: _id });
     //console.log(res);
     expect(res)
       .to.be.an("object")
@@ -76,17 +78,16 @@ describe("buAPI.Invites.get(options)", () => {
 describe("buAPI.Invites.sendResponse(options)", () => {
   it("should be able to update invites status, response_message, and response_date", async () => {
     const { Invites } = await Client.loadService(url);
-    const { invites } = await Invites.get({ source, target });
+    const { invites } = await Invites.get({ id: _id });
     const id = invites[0]._id;
     const status = ["rejected", "accepted"][parseInt(Math.random() * 1000) % 2];
     const message = `I'm honored to have ${status} your offer`;
 
     const res = await Invites.sendResponse({ id, status, message });
-
-    console.log(res);
+    //console.log(res);
     expect(res)
       .to.be.an("object")
-      .that.has.keys("status", "updatedInvite", "message");
+      .that.has.keys("status", "updatedInvite");
     expect(res.status).to.equals(200);
     expect(res.updatedInvite).to.be.an("object");
     expect(res.updatedInvite)
