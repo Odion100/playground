@@ -8521,10 +8521,10 @@ shortid@^2.2.14:
   dependencies:
     nanoid "^2.1.0"
 
-sht-tasks@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/sht-tasks/-/sht-tasks-2.0.6.tgz#6be0853a385eb37d44cfc8bdf5741a1c5036c95c"
-  integrity sha512-330F4T1cj7bCydHTBGO5wwMEujyPMFtBMDMySVw7nwh6qRv6amrW1S2fKM61bS+RfpzCTPXBxb51lCqNqc4mTQ==
+sht-tasks@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/sht-tasks/-/sht-tasks-2.0.7.tgz#109470a3da8cd3cf518070b8a80524e3c35a02fb"
+  integrity sha512-kWOyTLXSHU2zE7F+jvYT5cfUJ9AjZVjK6TaX7d3A7mCcmW83TnFs440fA0Vso0WcoANqW+Au7TI4fzHm4VHr0g==
   dependencies:
     body-parser "^1.18.3"
     chai-as-promised "^7.1.1"
@@ -9102,10 +9102,10 @@ tar@^4:
     safe-buffer "^5.1.2"
     yallist "^3.0.3"
 
-tasksjs-react-client@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/tasksjs-react-client/-/tasksjs-react-client-1.0.4.tgz#58e31f61cebf75ff7c2bb4ed26e5c6f5adff1a50"
-  integrity sha512-PrPS1P7IIQcTQytZc4cPWfhfSB0YoALBB4Mx7N4adAIrohNTQV78gWkVQS3d9/rFwmjodMYjkyXeCwULrnZKBg==
+tasksjs-react-client@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/tasksjs-react-client/-/tasksjs-react-client-1.1.5.tgz#0c1fd62fd447712c6fcefbc7f87e868bde3663bc"
+  integrity sha512-3nZ6TKjB59JkShaT8Isz8hCSXp+kyaWxCWJFKKwAEOPkQXIWla/lwPOciku4Oj2rusn+QDuhYh6Tub08lbk4rw==
   dependencies:
     body-parser "^1.18.3"
     chai-as-promised "^7.1.1"
