@@ -10,23 +10,32 @@ let _id = "";
 describe("buAPI.Invites.add(options)", () => {
   it("should be able to successfully create an invite", async () => {
     const { Invites } = await Client.loadService(url);
+
+    Invites.on(`new_invite:${target}`, (data, event) => {
+      console.log(`new_invite:${target} event called`);
+
+      expect(data).to.be.an("object");
+      expect(data).to.have.property("created_date").that.is.a("string");
+      expect(data).to.have.property("status", "sent");
+      expect(data).to.have.property("source_type", "tournament");
+      expect(data).to.have.property("target_type", "team");
+      expect(data).to.have.property("target", target);
+      expect(data).to.have.property("source", source);
+    });
+
     const res = await Invites.add({
       source_type: "tournament",
       source,
       target_type: "team",
       target,
-      message: "Welcome to BallerUnited Official Tournament"
+      message: "Welcome to BallerUnited Official Tournament",
     });
 
     //console.log(res);
-    expect(res)
-      .to.be.an("object")
-      .that.has.keys("status", "newInvite", "message");
+    expect(res).to.be.an("object").that.has.keys("status", "newInvite", "message");
     expect(res.status).to.equals(200);
     expect(res.newInvite).to.be.an("object");
-    expect(res.newInvite)
-      .to.have.property("created_date")
-      .that.is.a("string");
+    expect(res.newInvite).to.have.property("created_date").that.is.a("string");
     expect(res.newInvite).to.have.property("status", "sent");
     expect(res.newInvite).to.have.property("source_type", "tournament");
     expect(res.newInvite).to.have.property("target_type", "team");
@@ -38,40 +47,20 @@ describe("buAPI.Invites.add(options)", () => {
 describe("buAPI.Invites.get(options)", () => {
   it("should be able to succesfully retrieve an invite using 'source', 'target' or 'id'", async () => {
     const { Invites } = await Client.loadService(url);
+
     const res = await Invites.get({ source, target, id: _id });
     //console.log(res);
-    expect(res)
-      .to.be.an("object")
-      .that.has.all.keys("invites", "status");
+    expect(res).to.be.an("object").that.has.all.keys("invites", "status");
     expect(res.status).to.be.equal(200);
     expect(res.invites).to.be.an("array");
 
     expect(res.invites[0]).to.be.an("object");
-    expect(res.invites[0])
-      .to.have.property("created_date")
-      .that.is.a("string");
+    expect(res.invites[0]).to.have.property("created_date").that.is.a("string");
     expect(res.invites[0]).to.have.property("status", "sent");
     expect(res.invites[0]).to.have.property("source_type", "tournament");
     expect(res.invites[0]).to.have.property("target_type", "team");
     expect(res.invites[0]).to.have.property("target", target);
     expect(res.invites[0]).to.have.property("source", source);
-
-    const res2 = await Invites.get({ id: res.invites[0]._id });
-    expect(res2)
-      .to.be.an("object")
-      .that.has.all.keys("invites", "status");
-    expect(res2.status).to.be.equal(200);
-    expect(res2.invites).to.be.an("array");
-
-    expect(res2.invites[0]).to.be.an("object");
-    expect(res2.invites[0])
-      .to.have.property("created_date")
-      .that.is.a("string");
-    expect(res2.invites[0]).to.have.property("status", "sent");
-    expect(res2.invites[0]).to.have.property("source_type", "tournament");
-    expect(res2.invites[0]).to.have.property("target_type", "team");
-    expect(res2.invites[0]).to.have.property("target", target);
-    expect(res2.invites[0]).to.have.property("source", source);
   });
 });
 
@@ -82,21 +71,15 @@ describe("buAPI.Invites.markAsViewed(options)", () => {
 
     const res = await Invites.markAsViewed({ id });
     //console.log(res);
-    expect(res)
-      .to.be.an("object")
-      .that.has.keys("status", "updatedInvite");
+    expect(res).to.be.an("object").that.has.keys("status", "updatedInvite");
     expect(res.status).to.equals(200);
     expect(res.updatedInvite).to.be.an("object");
-    expect(res.updatedInvite)
-      .to.have.property("created_date")
-      .that.is.a("string");
+    expect(res.updatedInvite).to.have.property("created_date").that.is.a("string");
     expect(res.updatedInvite).to.have.property("source_type", "tournament");
     expect(res.updatedInvite).to.have.property("target_type", "team");
     expect(res.updatedInvite).to.have.property("target", target);
     expect(res.updatedInvite).to.have.property("source", source);
-    expect(res.updatedInvite)
-      .to.have.property("viewed_date")
-      .that.is.a("string");
+    expect(res.updatedInvite).to.have.property("viewed_date").that.is.a("string");
   });
 });
 
@@ -107,21 +90,15 @@ describe("buAPI.Invites.cancel(options)", () => {
 
     const res = await Invites.cancel({ id });
     //console.log(res);
-    expect(res)
-      .to.be.an("object")
-      .that.has.keys("status", "updatedInvite");
+    expect(res).to.be.an("object").that.has.keys("status", "updatedInvite");
     expect(res.status).to.equals(200);
     expect(res.updatedInvite).to.be.an("object");
-    expect(res.updatedInvite)
-      .to.have.property("created_date")
-      .that.is.a("string");
+    expect(res.updatedInvite).to.have.property("created_date").that.is.a("string");
     expect(res.updatedInvite).to.have.property("source_type", "tournament");
     expect(res.updatedInvite).to.have.property("target_type", "team");
     expect(res.updatedInvite).to.have.property("target", target);
     expect(res.updatedInvite).to.have.property("source", source);
-    expect(res.updatedInvite)
-      .to.have.property("viewed_date")
-      .that.is.a("string");
+    expect(res.updatedInvite).to.have.property("viewed_date").that.is.a("string");
     expect(res.updatedInvite).to.have.property("status", "canceled");
   });
 });
@@ -133,17 +110,13 @@ describe("buAPI.Invites.resend(options)", () => {
 
     const res = await Invites.resend({
       id,
-      message: "Re:Welcome to BallerUnited Official Tournament"
+      message: "Re:Welcome to BallerUnited Official Tournament",
     });
     //console.log(res);
-    expect(res)
-      .to.be.an("object")
-      .that.has.keys("status", "updatedInvite");
+    expect(res).to.be.an("object").that.has.keys("status", "updatedInvite");
     expect(res.status).to.equals(200);
     expect(res.updatedInvite).to.be.an("object");
-    expect(res.updatedInvite)
-      .to.have.property("created_date")
-      .that.is.a("string");
+    expect(res.updatedInvite).to.have.property("created_date").that.is.a("string");
     expect(res.updatedInvite).to.have.property("source_type", "tournament");
     expect(res.updatedInvite).to.have.property("target_type", "team");
     expect(res.updatedInvite).to.have.property("target", target);
@@ -161,14 +134,10 @@ describe("buAPI.Invites.sendResponse(options)", () => {
 
     const res = await Invites.sendResponse({ id, status, message });
     //console.log(res);
-    expect(res)
-      .to.be.an("object")
-      .that.has.keys("status", "updatedInvite");
+    expect(res).to.be.an("object").that.has.keys("status", "updatedInvite");
     expect(res.status).to.equals(200);
     expect(res.updatedInvite).to.be.an("object");
-    expect(res.updatedInvite)
-      .to.have.property("created_date")
-      .that.is.a("string");
+    expect(res.updatedInvite).to.have.property("created_date").that.is.a("string");
     expect(res.updatedInvite).to.have.property("status", status);
     expect(res.updatedInvite).to.have.property("source_type", "tournament");
     expect(res.updatedInvite).to.have.property("target_type", "team");
