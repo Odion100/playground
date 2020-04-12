@@ -133,7 +133,6 @@ describe("buAPI.Invites.sendResponse(options)", () => {
     const id = _id;
     const status = ["rejected", "accepted"][parseInt(Math.random() * 1000) % 2];
     const message = `I'm honored to have ${status} your offer`;
-    console.log(`invite_response:${source}`);
 
     const res = await Invites.sendResponse({ id, status, message });
 
