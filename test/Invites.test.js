@@ -11,18 +11,6 @@ describe("buAPI.Invites.add(options)", () => {
   it("should be able to successfully create an invite", async () => {
     const { Invites } = await Client.loadService(url);
 
-    Invites.on(`new_invite:${target}`, (data, event) => {
-      console.log(`new_invite:${target} event called`);
-
-      expect(data).to.be.an("object");
-      expect(data).to.have.property("created_date").that.is.a("string");
-      expect(data).to.have.property("status", "sent");
-      expect(data).to.have.property("source_type", "tournament");
-      expect(data).to.have.property("target_type", "team");
-      expect(data).to.have.property("target", target);
-      expect(data).to.have.property("source", source);
-    });
-
     const res = await Invites.add({
       source_type: "tournament",
       source,
@@ -42,6 +30,20 @@ describe("buAPI.Invites.add(options)", () => {
     expect(res.newInvite).to.have.property("target", target);
     expect(res.newInvite).to.have.property("source", source);
     _id = res.newInvite._id;
+    await new Promise((resolve) =>
+      Invites.on(`new_invite:${target}`, (invite) => {
+        console.log(`new_invite:${target} event called`);
+
+        expect(invite).to.be.an("object");
+        expect(invite).to.have.property("created_date").that.is.a("string");
+        expect(invite).to.have.property("status", "sent");
+        expect(invite).to.have.property("source_type", "tournament");
+        expect(invite).to.have.property("target_type", "team");
+        expect(invite).to.have.property("target", target);
+        expect(invite).to.have.property("source", source);
+        resolve();
+      })
+    );
   });
 });
 describe("buAPI.Invites.get(options)", () => {
@@ -131,8 +133,10 @@ describe("buAPI.Invites.sendResponse(options)", () => {
     const id = _id;
     const status = ["rejected", "accepted"][parseInt(Math.random() * 1000) % 2];
     const message = `I'm honored to have ${status} your offer`;
+    console.log(`invite_response:${source}`);
 
     const res = await Invites.sendResponse({ id, status, message });
+
     //console.log(res);
     expect(res).to.be.an("object").that.has.keys("status", "updatedInvite");
     expect(res.status).to.equals(200);
@@ -143,5 +147,18 @@ describe("buAPI.Invites.sendResponse(options)", () => {
     expect(res.updatedInvite).to.have.property("target_type", "team");
     expect(res.updatedInvite).to.have.property("target", target);
     expect(res.updatedInvite).to.have.property("source", source);
+    await new Promise((resolve) =>
+      Invites.on(`invite_response:${source}`, (invite) => {
+        console.log(`invite_response:${source} event called`);
+
+        expect(invite).to.be.an("object");
+        expect(invite).to.have.property("created_date").that.is.a("string");
+        expect(invite).to.have.property("source_type", "tournament");
+        expect(invite).to.have.property("target_type", "team");
+        expect(invite).to.have.property("target", target);
+        expect(invite).to.have.property("source", source);
+        resolve();
+      })
+    );
   });
 });
