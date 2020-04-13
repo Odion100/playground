@@ -3,20 +3,31 @@ const { Client } = require("tasksjs-react-client");
 const route = "bu/utils";
 const port = 7900;
 const url = `http://localhost:${port}/${route}`;
-
+//
 const target = "5e8cc4359180142b0605416f";
-const source = "5e8c95739136f2127da83417";
+let source = "5e8c95739136f2127da83417";
 let _id = "";
+beforeAll(async () => {
+  const route = "bu/api";
+  const port = 7899;
+  const url = `http://localhost:${port}/${route}`;
+  const { Tournaments } = await Client.loadService(url);
+
+  const name = `TheEventTester-${parseInt(Math.random() * 1000)}`;
+  const root_admin = "5e82135037543ac757722727";
+  const res = await Tournaments.add({ name, root_admin });
+  source = res.newTournament._id;
+});
 describe("buAPI.Invites.add(options)", () => {
   it("should be able to successfully create an invite", async () => {
     const { Invites } = await Client.loadService(url);
 
     const res = await Invites.add({
-      source_type: "tournament",
+      source_type: "tournaments",
       source,
-      target_type: "team",
+      target_type: "teams",
       target,
-      message: "Welcome to BallerUnited Official Tournament",
+      message: "Welcome to BallersUnited Official Tournament",
     });
 
     //console.log(res);
@@ -25,10 +36,11 @@ describe("buAPI.Invites.add(options)", () => {
     expect(res.newInvite).to.be.an("object");
     expect(res.newInvite).to.have.property("created_date").that.is.a("string");
     expect(res.newInvite).to.have.property("status", "sent");
-    expect(res.newInvite).to.have.property("source_type", "tournament");
-    expect(res.newInvite).to.have.property("target_type", "team");
+    expect(res.newInvite).to.have.property("source_type", "tournaments");
+    expect(res.newInvite).to.have.property("target_type", "teams");
     expect(res.newInvite).to.have.property("target", target);
     expect(res.newInvite).to.have.property("source", source);
+
     _id = res.newInvite._id;
     await new Promise((resolve) =>
       Invites.on(`new_invite:${target}`, (invite) => {
@@ -37,8 +49,8 @@ describe("buAPI.Invites.add(options)", () => {
         expect(invite).to.be.an("object");
         expect(invite).to.have.property("created_date").that.is.a("string");
         expect(invite).to.have.property("status", "sent");
-        expect(invite).to.have.property("source_type", "tournament");
-        expect(invite).to.have.property("target_type", "team");
+        expect(invite).to.have.property("source_type", "tournaments");
+        expect(invite).to.have.property("target_type", "teams");
         expect(invite).to.have.property("target", target);
         expect(invite).to.have.property("source", source);
         resolve();
@@ -59,8 +71,8 @@ describe("buAPI.Invites.get(options)", () => {
     expect(res.invites[0]).to.be.an("object");
     expect(res.invites[0]).to.have.property("created_date").that.is.a("string");
     expect(res.invites[0]).to.have.property("status", "sent");
-    expect(res.invites[0]).to.have.property("source_type", "tournament");
-    expect(res.invites[0]).to.have.property("target_type", "team");
+    expect(res.invites[0]).to.have.property("source_type", "tournaments");
+    expect(res.invites[0]).to.have.property("target_type", "teams");
     expect(res.invites[0]).to.have.property("target", target);
     expect(res.invites[0]).to.have.property("source", source);
   });
@@ -77,8 +89,8 @@ describe("buAPI.Invites.markAsViewed(options)", () => {
     expect(res.status).to.equals(200);
     expect(res.updatedInvite).to.be.an("object");
     expect(res.updatedInvite).to.have.property("created_date").that.is.a("string");
-    expect(res.updatedInvite).to.have.property("source_type", "tournament");
-    expect(res.updatedInvite).to.have.property("target_type", "team");
+    expect(res.updatedInvite).to.have.property("source_type", "tournaments");
+    expect(res.updatedInvite).to.have.property("target_type", "teams");
     expect(res.updatedInvite).to.have.property("target", target);
     expect(res.updatedInvite).to.have.property("source", source);
     expect(res.updatedInvite).to.have.property("viewed_date").that.is.a("string");
@@ -88,8 +100,8 @@ describe("buAPI.Invites.markAsViewed(options)", () => {
 
         expect(invite).to.be.an("object");
         expect(invite).to.have.property("created_date").that.is.a("string");
-        expect(invite).to.have.property("source_type", "tournament");
-        expect(invite).to.have.property("target_type", "team");
+        expect(invite).to.have.property("source_type", "tournaments");
+        expect(invite).to.have.property("target_type", "teams");
         expect(invite).to.have.property("target", target);
         expect(invite).to.have.property("source", source);
         expect(invite).to.have.property("viewed_date").that.is.a("string");
@@ -110,8 +122,8 @@ describe("buAPI.Invites.cancel(options)", () => {
     expect(res.status).to.equals(200);
     expect(res.updatedInvite).to.be.an("object");
     expect(res.updatedInvite).to.have.property("created_date").that.is.a("string");
-    expect(res.updatedInvite).to.have.property("source_type", "tournament");
-    expect(res.updatedInvite).to.have.property("target_type", "team");
+    expect(res.updatedInvite).to.have.property("source_type", "tournaments");
+    expect(res.updatedInvite).to.have.property("target_type", "teams");
     expect(res.updatedInvite).to.have.property("target", target);
     expect(res.updatedInvite).to.have.property("source", source);
     expect(res.updatedInvite).to.have.property("viewed_date").that.is.a("string");
@@ -123,8 +135,8 @@ describe("buAPI.Invites.cancel(options)", () => {
 
         expect(invite).to.be.an("object");
         expect(invite).to.have.property("created_date").that.is.a("string");
-        expect(invite).to.have.property("source_type", "tournament");
-        expect(invite).to.have.property("target_type", "team");
+        expect(invite).to.have.property("source_type", "tournaments");
+        expect(invite).to.have.property("target_type", "teams");
         expect(invite).to.have.property("target", target);
         expect(invite).to.have.property("source", source);
         expect(invite).to.have.property("viewed_date").that.is.a("string");
@@ -149,8 +161,8 @@ describe("buAPI.Invites.resend(options)", () => {
     expect(res.status).to.equals(200);
     expect(res.updatedInvite).to.be.an("object");
     expect(res.updatedInvite).to.have.property("created_date").that.is.a("string");
-    expect(res.updatedInvite).to.have.property("source_type", "tournament");
-    expect(res.updatedInvite).to.have.property("target_type", "team");
+    expect(res.updatedInvite).to.have.property("source_type", "tournaments");
+    expect(res.updatedInvite).to.have.property("target_type", "teams");
     expect(res.updatedInvite).to.have.property("target", target);
     expect(res.updatedInvite).to.have.property("source", source);
     expect(res.updatedInvite).to.have.property("status", "sent");
@@ -161,8 +173,8 @@ describe("buAPI.Invites.resend(options)", () => {
 
         expect(invite).to.be.an("object");
         expect(invite).to.have.property("created_date").that.is.a("string");
-        expect(invite).to.have.property("source_type", "tournament");
-        expect(invite).to.have.property("target_type", "team");
+        expect(invite).to.have.property("source_type", "tournaments");
+        expect(invite).to.have.property("target_type", "teams");
         expect(invite).to.have.property("target", target);
         expect(invite).to.have.property("source", source);
         expect(invite).to.have.property("status", "sent");
@@ -187,8 +199,8 @@ describe("buAPI.Invites.sendResponse(options)", () => {
     expect(res.updatedInvite).to.be.an("object");
     expect(res.updatedInvite).to.have.property("created_date").that.is.a("string");
     expect(res.updatedInvite).to.have.property("status", status);
-    expect(res.updatedInvite).to.have.property("source_type", "tournament");
-    expect(res.updatedInvite).to.have.property("target_type", "team");
+    expect(res.updatedInvite).to.have.property("source_type", "tournaments");
+    expect(res.updatedInvite).to.have.property("target_type", "teams");
     expect(res.updatedInvite).to.have.property("target", target);
     expect(res.updatedInvite).to.have.property("source", source);
     await new Promise((resolve) =>
@@ -197,12 +209,21 @@ describe("buAPI.Invites.sendResponse(options)", () => {
 
         expect(invite).to.be.an("object");
         expect(invite).to.have.property("created_date").that.is.a("string");
-        expect(invite).to.have.property("source_type", "tournament");
-        expect(invite).to.have.property("target_type", "team");
+        expect(invite).to.have.property("source_type", "tournaments");
+        expect(invite).to.have.property("target_type", "teams");
         expect(invite).to.have.property("target", target);
         expect(invite).to.have.property("source", source);
         resolve();
       })
     );
+    const buapi_route = "bu/api";
+    const buapi_port = 7899;
+    const buapi_url = `http://localhost:${buapi_port}/${buapi_route}`;
+    const { Tournaments } = await Client.loadService(buapi_url);
+    await new Promise((resolve) => {
+      console.log(`team_added:${target}`);
+      Tournaments.on(`team_added:${target}`, () => console.log("team added<<<-----------"));
+      resolve();
+    });
   });
 });
