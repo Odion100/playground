@@ -15,18 +15,14 @@ describe("buAPI.Tournaments.add(options)", () => {
     const res = await Tournaments.add({ name, root_admin, primary_zipcodes });
 
     // console.log(res);
-    expect(res)
-      .to.be.an("object")
-      .that.has.keys("status", "newTournament", "message");
+    expect(res).to.be.an("object").that.has.keys("status", "newTournament", "message");
 
     expect(res.message).to.be.equal("New tournament created successfully.");
     expect(res.status).to.be.equal(200);
     expect(res.newTournament).to.be.an("object");
 
     expect(res.newTournament).to.have.property("name", name);
-    expect(res.newTournament)
-      .to.have.property("root_admin")
-      .that.deep.equals(root_admin);
+    expect(res.newTournament).to.have.property("root_admin").that.deep.equals(root_admin);
     expect(res.newTournament).to.have.property("status", "unpublished");
     expect(res.newTournament).to.have.property("refereed", false);
     expect(res.newTournament).to.have.property("rounds", 1);
@@ -39,13 +35,9 @@ describe("buAPI.Tournaments.get(options)", () => {
     const { Tournaments } = await Client.loadService(url);
     const res = await Tournaments.get({ name });
     //console.log(res);
-    expect(res)
-      .to.be.an("object")
-      .that.has.all.keys("tournaments", "status");
+    expect(res).to.be.an("object").that.has.all.keys("tournaments", "status");
     expect(res.status).to.be.equal(200);
-    expect(res.tournaments)
-      .to.be.an("array")
-      .that.has.a.lengthOf(1);
+    expect(res.tournaments).to.be.an("array").that.has.a.lengthOf(1);
     expect(res.tournaments[0]).to.be.an("object");
   });
 });
@@ -59,23 +51,13 @@ describe("buAPI.Users.updateField(options)", () => {
     const description =
       "Civility vicinity graceful is it at Play. Basketball Improve up at 2 on mention perhaps raising.";
     const team_limit = 4;
-    // const teams = [
-    //   "5e877b1a579cd18468ba25fa,",
-    //   "5e877b2852e5d307c043313a",
-    //   "5e877b3514ee9b69a034da98",
-    //   "5e877b40d291389edb348d4c"
-    // ];
     const type = "2 on 2";
     const rules = ["n/a"];
     const refereed = true;
     const rounds = 4;
     const clock = 600000;
-    const start_date = moment()
-      .add(1, "day")
-      .toJSON();
-    const end_date = moment()
-      .add(2, "weeks")
-      .toJSON();
+    const start_date = moment().add(1, "day").toJSON();
+    const end_date = moment().add(2, "weeks").toJSON();
 
     const { Tournaments } = await Client.loadService(url);
     const { tournaments } = await Tournaments.get({ name });
@@ -95,13 +77,11 @@ describe("buAPI.Users.updateField(options)", () => {
         rounds,
         clock,
         start_date,
-        end_date
-      }
+        end_date,
+      },
     });
 
-    expect(res)
-      .to.be.an("object")
-      .that.has.keys("updatedTournament", "status");
+    expect(res).to.be.an("object").that.has.keys("updatedTournament", "status");
     expect(res.status).to.equal(200);
     expect(res.updatedTournament).to.have.property("profile_image", profile_image);
     expect(res.updatedTournament).to.have.property("banner_image", banner_image);
@@ -114,9 +94,7 @@ describe("buAPI.Users.updateField(options)", () => {
     expect(res.updatedTournament).to.have.property("description", description);
     expect(res.updatedTournament).to.have.property("team_limit", team_limit);
     expect(res.updatedTournament).to.have.property("type", type);
-    expect(res.updatedTournament)
-      .to.have.property("rules")
-      .that.deep.equals(rules);
+    expect(res.updatedTournament).to.have.property("rules").that.deep.equals(rules);
     expect(res.updatedTournament).to.have.property("refereed", refereed);
     expect(res.updatedTournament).to.have.property("rounds", rounds);
     expect(res.updatedTournament).to.have.property("clock", clock);
@@ -132,9 +110,7 @@ describe("buAPI.Tournaments.publish(options)", () => {
     const id = tournaments[0];
     const res = await Tournaments.publish({ id });
     //console.log(res);
-    expect(res)
-      .to.be.an("object")
-      .that.has.keys("updatedTournament", "status");
+    expect(res).to.be.an("object").that.has.keys("updatedTournament", "status");
     expect(res.status).to.equal(200);
     expect(res.updatedTournament).to.have.property("status", "published");
   });
@@ -147,9 +123,7 @@ describe("buAPI.Tournaments.cancel(options)", () => {
     const id = tournaments[0]._id;
     const res = await Tournaments.cancel({ id });
     //console.log(res);
-    expect(res)
-      .to.be.an("object")
-      .that.has.keys("updatedTournament", "status");
+    expect(res).to.be.an("object").that.has.keys("updatedTournament", "status");
     expect(res.status).to.equal(200);
     expect(res.updatedTournament).to.have.property("status", "unpublished");
   });
@@ -162,9 +136,7 @@ describe("buAPI.Tournaments.reactivate(options)", () => {
     const id = tournaments[0]._id;
     const res = await Tournaments.reactivate({ id });
     //console.log(res);
-    expect(res)
-      .to.be.an("object")
-      .that.has.keys("updatedTournament", "status");
+    expect(res).to.be.an("object").that.has.keys("updatedTournament", "status");
     expect(res.status).to.equal(200);
     expect(res.updatedTournament).to.have.property("status", "published");
   });
