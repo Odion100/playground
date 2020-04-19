@@ -24,7 +24,7 @@ describe("buAPI.Tournaments.add(options)", () => {
     expect(res.newTournament).to.have.property("name", name);
     expect(res.newTournament).to.have.property("root_admin").that.deep.equals(root_admin);
     expect(res.newTournament).to.have.property("status", "unpublished");
-    expect(res.newTournament).to.have.property("refereed", false);
+
     expect(res.newTournament).to.have.property("rounds", 1);
     expect(res.newTournament).to.have.property("clock", 0);
   });
@@ -53,7 +53,7 @@ describe("buAPI.Users.updateField(options)", () => {
     const team_limit = 4;
     const type = "2 on 2";
     const rules = ["n/a"];
-    const refereed = true;
+
     const rounds = 4;
     const clock = 600000;
     const start_date = moment().add(1, "day").toJSON();
@@ -73,7 +73,7 @@ describe("buAPI.Users.updateField(options)", () => {
         team_limit,
         type,
         rules,
-        refereed,
+
         rounds,
         clock,
         start_date,
@@ -95,7 +95,7 @@ describe("buAPI.Users.updateField(options)", () => {
     expect(res.updatedTournament).to.have.property("team_limit", team_limit);
     expect(res.updatedTournament).to.have.property("type", type);
     expect(res.updatedTournament).to.have.property("rules").that.deep.equals(rules);
-    expect(res.updatedTournament).to.have.property("refereed", refereed);
+
     expect(res.updatedTournament).to.have.property("rounds", rounds);
     expect(res.updatedTournament).to.have.property("clock", clock);
     expect(res.updatedTournament).to.have.property("start_date", start_date);

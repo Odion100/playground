@@ -25,7 +25,7 @@ describe("buAPI.Games.add(options)", () => {
     expect(res.status).to.equal(200);
     expect(res.newGame).to.be.an("object");
     expect(res.newGame).to.have.property("created_date").that.is.a("string");
-    expect(res.newGame).to.have.property("status", "pending");
+    expect(res.newGame).to.have.property("status", "unpublished");
     expect(res.newGame).to.have.property("_id").that.is.a("string");
     expect(res.newGame).to.have.property("creator", creator);
     expect(res.newGame).to.have.property("team1", team1);
@@ -50,7 +50,7 @@ describe("buAPI.Games.get(options)", () => {
     expect(res.status).to.equal(200);
     expect(res.games[0]).to.be.an("object");
     expect(res.games[0]).to.have.property("created_date").that.is.a("string");
-    expect(res.games[0]).to.have.property("status", "pending");
+    expect(res.games[0]).to.have.property("status", "unpublished");
     expect(res.games[0]).to.have.property("_id").that.is.a("string");
     expect(res.games[0]).to.have.property("creator", creator);
     expect(res.games[0]).to.have.property("team1", team1);
@@ -62,15 +62,12 @@ describe("buAPI.Games.get(options)", () => {
 describe("buAPI.Games.updateFields(options)", () => {
   it("successfully create a new user with email and password required", async () => {
     const { Games } = await Client.loadService(url);
-    const new_status = "canceled";
-    const start_date = moment().add(1, "day").toJSON();
+
     tags.push("flygame");
     const res = await Games.updateFields({
       id,
       fields: {
-        status: new_status,
         tags,
-        start_date,
       },
     });
     //console.log(res);
@@ -78,12 +75,10 @@ describe("buAPI.Games.updateFields(options)", () => {
     expect(res.status).to.equal(200);
     expect(res.updatedGame).to.be.an("object");
     expect(res.updatedGame).to.have.property("created_date").that.is.a("string");
-    expect(res.updatedGame).to.have.property("status", new_status);
     expect(res.updatedGame).to.have.property("_id").that.is.a("string");
     expect(res.updatedGame).to.have.property("creator", creator);
     expect(res.updatedGame).to.have.property("team1", team1);
     expect(res.updatedGame).to.have.property("team2", team2);
     expect(res.updatedGame).to.have.property("court", court);
-    expect(moment(res.updatedGame.start_date).isSame(start_date)).to.equal(true);
   });
 });
