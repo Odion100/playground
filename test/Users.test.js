@@ -3,7 +3,7 @@ const { Client } = require("tasksjs-react-client");
 const route = "bu/api";
 const port = 7899;
 const url = `http://localhost:${port}/${route}`;
-
+const tag = "#kjdlsfj";
 const email = `odzysofreezy${parseInt(Math.random() * 1000)}@gmail.com`;
 const password = "passthesenutson";
 
@@ -11,6 +11,7 @@ describe("buAPI.Users.add(options)", () => {
   it("successfully create a new user with email and password required", async () => {
     const { Users } = await Client.loadService(url);
     const res = await Users.add({ email, password });
+    // console.log(res);
     expect(res).to.be.an("object").that.has.all.keys("newUser", "status", "message");
     expect(res.message).to.be.equal("New user created successfully.");
     expect(res.status).to.be.equal(200);
@@ -22,6 +23,7 @@ describe("buAPI.Users.get(options)", () => {
   it("should be able to succesfully retrieve a user using email and password or just id", async () => {
     const { Users } = await Client.loadService(url);
     const res = await Users.get({ email, password });
+    //console.log(res);
     expect(res).to.be.an("object").that.has.all.keys("user", "status");
     expect(res.status).to.be.equal(200);
     expect(res.user).to.be.an("object");
@@ -41,10 +43,10 @@ describe("buAPI.Users.updateField(options)", () => {
     const gender = "Male";
     const profile_image = "image.png";
     const primary_zipcodes = ["12133"];
-    const tag = "#kjdlsfj";
+
     const { Users } = await Client.loadService(url);
     const { user } = await Users.get({ email, password });
-    console.log("user", user, email);
+    //console.log("user", user, email);
     expect(user).to.be.an("object");
     expect(user).to.have.property("email", email);
     expect(user).to.have.property("account_status", "active");
@@ -59,11 +61,10 @@ describe("buAPI.Users.updateField(options)", () => {
         gender,
         profile_image,
         primary_zipcodes,
-        tag,
       },
       id: user._id,
     });
-    //console.log("res----->", res);
+    //console.log(res);
     expect(res).to.be.an("object");
     expect(res).to.have.property("status", 200);
     expect(res).to.have.property("updatedUser").that.is.an("object");
@@ -74,7 +75,6 @@ describe("buAPI.Users.updateField(options)", () => {
     expect(res.updatedUser).to.have.property("profile_image", profile_image);
     expect(res.updatedUser).to.have.property("account_status", "active");
     expect(res.updatedUser).to.have.property("primary_zipcodes").that.deep.equals(primary_zipcodes);
-    expect(res.updatedUser).to.have.property("tags").that.is.an("array").that.has.a.lengthOf(0);
   });
 });
 
@@ -97,6 +97,39 @@ describe("buAPI.Users.setAccountStatus(options)", () => {
     expect(res.updatedUser).to.have.property("profile_image");
     expect(res.updatedUser).to.have.property("primary_zipcodes");
     expect(res.updatedUser).to.have.property("account_status", "archived");
-    expect(res.updatedUser).to.have.property("tags").that.is.an("array").that.has.a.lengthOf(0);
+  });
+});
+
+describe("buAPI.Users.addTag(options)", () => {
+  it("should successfully add a tag to a user", async () => {
+    const { Users } = await Client.loadService(url);
+    const { user } = await Users.get({ email, password, status: "archived" });
+    const res = await Users.addTag({
+      tag,
+      id: user._id,
+    });
+    //console.log(res);
+    expect(res).to.be.an("object").that.has.keys("status", "updated");
+    expect(res).to.have.property("status", 200);
+    expect(res).to.have.property("updated").to.equal(true);
+  });
+});
+
+describe("buAPI.Users.findByTag(options)", () => {
+  it("should successfully add a tag to a user", async () => {
+    const { Users } = await Client.loadService(url);
+
+    const res = await Users.findByTag({
+      tag,
+    });
+    //console.log(res);
+    expect(res).to.be.an("object").that.has.keys("status", "data");
+    expect(res.data[0]).to.have.property("first_name");
+    expect(res.data[0]).to.have.property("last_name");
+    expect(res.data[0]).to.have.property("age");
+    expect(res.data[0]).to.have.property("gender");
+    expect(res.data[0]).to.have.property("profile_image");
+    expect(res.data[0]).to.have.property("primary_zipcodes");
+    expect(res.data[0]).to.have.property("account_status", "archived");
   });
 });
