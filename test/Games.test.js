@@ -70,7 +70,7 @@ describe("buAPI.Games.updateFields(options)", () => {
         tags,
       },
     });
-    console.log(res);
+    //console.log(res);
     expect(res).to.be.an("object").that.has.keys("updatedGame", "status");
     expect(res.status).to.equal(200);
     expect(res.updatedGame).to.be.an("object");
