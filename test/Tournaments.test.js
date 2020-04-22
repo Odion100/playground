@@ -8,7 +8,7 @@ const url = `http://localhost:${port}/${route}`;
 const name = `FlyTournament-${parseInt(Math.random() * 1000)}`;
 const root_admin = "5e82135037543ac757722727";
 const primary_zipcodes = ["12133"];
-
+const tag = "testing123";
 describe("buAPI.Tournaments.add(options)", () => {
   it("successfully create a new tournaments with email and password required", async () => {
     const { Tournaments } = await Client.loadService(url);
@@ -42,7 +42,7 @@ describe("buAPI.Tournaments.get(options)", () => {
   });
 });
 
-describe("buAPI.Users.updateField(options)", () => {
+describe("buAPI.Tournaments.updateField(options)", () => {
   it("should be able to update non constant fields", async () => {
     const profile_image = "http://localhost:4402/fake/image";
     const banner_image = "http://localhost:4402/fake/image";
@@ -139,5 +139,33 @@ describe("buAPI.Tournaments.reactivate(options)", () => {
     expect(res).to.be.an("object").that.has.keys("updatedTournament", "status");
     expect(res.status).to.equal(200);
     expect(res.updatedTournament).to.have.property("status", "published");
+  });
+});
+
+describe("buAPI.Tournaments.addTag(options)", () => {
+  it("should successfully add a tag to a user", async () => {
+    const { Tournaments } = await Client.loadService(url);
+    const { tournaments } = await Tournaments.get({ name });
+    const res = await Tournaments.addTag({
+      tag,
+      id: tournaments[0]._id,
+    });
+    //console.log(res);
+    expect(res).to.be.an("object").that.has.keys("status", "updated");
+    expect(res).to.have.property("status", 200);
+    expect(res).to.have.property("updated").to.equal(true);
+  });
+});
+
+describe("buAPI.Tournaments.findByTag(options)", () => {
+  it("should successfully use a tag to a user", async () => {
+    const { Tournaments } = await Client.loadService(url);
+
+    const res = await Tournaments.findByTag({
+      tag,
+    });
+    // console.log(res);
+    expect(res).to.be.an("object").that.has.keys("status", "data");
+    expect(res).to.have.property("status", 200);
   });
 });
