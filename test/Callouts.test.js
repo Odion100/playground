@@ -10,7 +10,7 @@ const date = moment().toJSON();
 const court = "5e987bfc0101204a799a54d3";
 const description = "Pull up boi";
 const invitee = "5e9ce4fbe67e87294b224b24";
-const tags = ["ps9"];
+const tag = "ps9";
 let id = "";
 let invite_only = [true, false][parseInt(Math.random() * 1000) % 2];
 
@@ -23,7 +23,7 @@ describe("buAPI.Callouts.add(options)", function () {
       court,
       invite_only,
     });
-    // console.log(res);
+    //console.log(res);
     expect(res).to.be.an("object").that.has.keys("newCallout", "status", "message");
     expect(res.status).to.equal(200);
     expect(res.newCallout).to.be.an("object");
@@ -70,7 +70,6 @@ describe("buAPI.Callouts.updateFields(options)", function () {
     const res = await Callouts.updateFields({
       id,
       fields: {
-        tags,
         description,
         invite_only,
       },
@@ -92,7 +91,6 @@ describe("buAPI.Callouts.updateFields(options)", function () {
 
     expect(res.updatedCallout).to.have.property("invite_only", invite_only);
     expect(res.updatedCallout).to.have.property("description", description);
-    expect(res.updatedCallout).to.have.property("tags").that.deep.equals(tags);
   });
 });
 
@@ -121,7 +119,6 @@ describe("buAPI.Callouts.addInvitee(options)", function () {
 
     expect(res.updatedCallout).to.have.property("invite_only", invite_only);
     expect(res.updatedCallout).to.have.property("description", description);
-    expect(res.updatedCallout).to.have.property("tags").that.deep.equals(tags);
     expect(res.updatedCallout).to.have.property("invitees").that.deep.equals([invitee]);
   });
 });
@@ -151,7 +148,6 @@ describe("buAPI.Callouts.removeInvitee(options)", function () {
 
     expect(res.updatedCallout).to.have.property("invite_only", invite_only);
     expect(res.updatedCallout).to.have.property("description", description);
-    expect(res.updatedCallout).to.have.property("tags").that.deep.equals(tags);
     expect(res.updatedCallout)
       .to.have.property("invitees")
       .that.is.an("array")
@@ -184,7 +180,6 @@ describe("buAPI.Callouts.addAttendee(options)", function () {
 
     expect(res.updatedCallout).to.have.property("invite_only", invite_only);
     expect(res.updatedCallout).to.have.property("description", description);
-    expect(res.updatedCallout).to.have.property("tags").that.deep.equals(tags);
     if (invite_only)
       expect(res.updatedCallout)
         .to.have.property("invitees")
@@ -218,12 +213,40 @@ describe("buAPI.Callouts.removeAttendee(options)", function () {
 
     expect(res.updatedCallout).to.have.property("invite_only", invite_only);
     expect(res.updatedCallout).to.have.property("description", description);
-    expect(res.updatedCallout).to.have.property("tags").that.deep.equals(tags);
     if (invite_only)
       expect(res.updatedCallout)
         .to.have.property("invitees")
         .that.is.an("array")
         .that.has.a.lengthOf(0);
     else expect(res.updatedCallout).to.have.property("invitees").that.deep.equals([invitee]);
+  });
+});
+
+describe("buAPI.Callouts.addTag(options)", () => {
+  it("should successfully add a tag", async () => {
+    const { Callouts } = await Client.loadService(url);
+
+    const res = await Callouts.addTag({
+      tag,
+      id,
+    });
+    //console.log(res);
+    expect(res).to.be.an("object").that.has.keys("status", "updated");
+    expect(res).to.have.property("status", 200);
+    expect(res).to.have.property("updated").to.equal(true);
+  });
+});
+
+describe("buAPI.Callouts.findByTag(options)", () => {
+  it("should successfully get an item by tag", async () => {
+    const { Callouts } = await Client.loadService(url);
+
+    const res = await Callouts.findByTag({
+      tag,
+    });
+    // console.log(res);
+    expect(res).to.be.an("object").that.has.keys("status", "data");
+    expect(res).to.have.property("status", 200);
+    expect(res.data[0]).to.have.property("_id");
   });
 });
