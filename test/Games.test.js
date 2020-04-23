@@ -7,7 +7,6 @@ const creator = "5e94ce3b0baae3259bf82eec";
 const team1 = "5e94cd8d4973e54eef1f4771";
 const team2 = "5e94cda8f18cd6cf096ce1ce";
 const court = "5e94cdd5382d4e90abf990f4";
-const tags = [`FlyTournament-${parseInt(Math.random() * 1000)}`];
 const tag = "testtag";
 let id = "";
 
@@ -19,7 +18,6 @@ describe("buAPI.Games.add(options)", () => {
       team1,
       team2,
       court,
-      tags,
     });
     //console.log(res);
     expect(res).to.be.an("object").that.has.keys("newGame", "status", "message");
@@ -45,7 +43,6 @@ describe("buAPI.Games.get(options)", () => {
       team1,
       team2,
       court,
-      tag: tags[0],
     });
     // console.log(res);
     expect(res).to.be.an("object").that.has.keys("games", "status");
