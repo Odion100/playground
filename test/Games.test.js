@@ -1,6 +1,5 @@
 const { expect } = require("chai");
 const { Client } = require("tasksjs-react-client");
-const moment = require("moment");
 const route = "bu/api";
 const port = 7899;
 const url = `http://localhost:${port}/${route}`;
@@ -9,7 +8,9 @@ const team1 = "5e94cd8d4973e54eef1f4771";
 const team2 = "5e94cda8f18cd6cf096ce1ce";
 const court = "5e94cdd5382d4e90abf990f4";
 const tags = [`FlyTournament-${parseInt(Math.random() * 1000)}`];
+const tag = "testtag";
 let id = "";
+
 describe("buAPI.Games.add(options)", () => {
   it("successfully create a new user with email and password required", async () => {
     const { Games } = await Client.loadService(url);
@@ -38,6 +39,7 @@ describe("buAPI.Games.add(options)", () => {
 describe("buAPI.Games.get(options)", () => {
   it("successfully create a new user with email and password required", async () => {
     const { Games } = await Client.loadService(url);
+
     const res = await Games.get({
       creator,
       team1,
@@ -62,12 +64,20 @@ describe("buAPI.Games.get(options)", () => {
 describe("buAPI.Games.updateFields(options)", () => {
   it("successfully create a new user with email and password required", async () => {
     const { Games } = await Client.loadService(url);
+    const team_size = 4;
+    const rounds = 4;
+    const clock = 600000;
+    const overtime_clock = 300000;
+    const refs = true;
 
-    tags.push("flygame");
     const res = await Games.updateFields({
       id,
       fields: {
-        tags,
+        team_size,
+        clock,
+        overtime_clock,
+        refs,
+        rounds,
       },
     });
     //console.log(res);
@@ -80,5 +90,38 @@ describe("buAPI.Games.updateFields(options)", () => {
     expect(res.updatedGame).to.have.property("team1", team1);
     expect(res.updatedGame).to.have.property("team2", team2);
     expect(res.updatedGame).to.have.property("court", court);
+    expect(res.updatedGame).to.have.property("team_size", team_size);
+    expect(res.updatedGame).to.have.property("rounds", rounds);
+    expect(res.updatedGame).to.have.property("clock", clock);
+    expect(res.updatedGame).to.have.property("overtime_clock", overtime_clock);
+    expect(res.updatedGame).to.have.property("refs", refs);
+  });
+});
+describe("buAPI.Games.addTag(options)", () => {
+  it("should successfully add a tag", async () => {
+    const { Games } = await Client.loadService(url);
+
+    const res = await Games.addTag({
+      tag,
+      id,
+    });
+    //console.log(res);
+    expect(res).to.be.an("object").that.has.keys("status", "updated");
+    expect(res).to.have.property("status", 200);
+    expect(res).to.have.property("updated").to.equal(true);
+  });
+});
+
+describe("buAPI.Games.findByTag(options)", () => {
+  it("should successfully get an item by tag", async () => {
+    const { Games } = await Client.loadService(url);
+
+    const res = await Games.findByTag({
+      tag,
+    });
+    // console.log(res);
+    expect(res).to.be.an("object").that.has.keys("status", "data");
+    expect(res).to.have.property("status", 200);
+    expect(res.data[0]).to.have.property("_id");
   });
 });
