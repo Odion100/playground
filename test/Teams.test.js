@@ -8,6 +8,7 @@ const url = `http://localhost:${port}/${route}`;
 const name = `FlyTeam-${parseInt(Math.random() * 1000)}`;
 const root_admin = "5e82135037543ac757722727";
 const primary_zipcodes = ["12133", parseInt(Math.random() * 10000).toString()];
+const tag = "maytag";
 let id = "";
 
 describe("buAPI.Teams.add(options)", () => {
@@ -80,5 +81,34 @@ describe("buAPI.Teams.updateFields(options)", () => {
     expect(res.updatedTeam).to.have.property("banner_image", banner_image);
     expect(res.updatedTeam).to.have.property("description", description);
     expect(res.updatedTeam).to.have.property("secondary_admins").that.deep.equals(secondary_admins);
+  });
+});
+
+describe("buAPI.Teams.addTag(options)", () => {
+  it("should successfully add a tag to a user", async () => {
+    const { Teams } = await Client.loadService(url);
+
+    const res = await Teams.addTag({
+      tag,
+      id,
+    });
+    //console.log(res);
+    expect(res).to.be.an("object").that.has.keys("status", "updated");
+    expect(res).to.have.property("status", 200);
+    expect(res).to.have.property("updated").to.equal(true);
+  });
+});
+
+describe("buAPI.Teams.findByTag(options)", () => {
+  it("should successfully use a tag to a user", async () => {
+    const { Teams } = await Client.loadService(url);
+
+    const res = await Teams.findByTag({
+      tag,
+    });
+    // console.log(res);
+    expect(res).to.be.an("object").that.has.keys("status", "data");
+    expect(res).to.have.property("status", 200);
+    expect(res.data[0]).to.have.property("_id");
   });
 });
