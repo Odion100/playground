@@ -1,9 +1,8 @@
 const { expect } = require("chai");
 const { Client } = require("tasksjs-react-client");
 //const moment = require("moment");
-const route = "bu/api";
-const port = 7899;
-const url = `http://localhost:${port}/${route}`;
+
+const { url } = require("./config");
 
 const name = `FlyTeam-${parseInt(Math.random() * 1000)}`;
 const root_admin = "5e82135037543ac757722727";
@@ -11,7 +10,7 @@ const primary_zipcodes = ["12133", parseInt(Math.random() * 10000).toString()];
 const tag = "maytag";
 let id = "";
 
-describe("buAPI.Teams.add(options)", () => {
+describe("BasketBall.Teams.add(options)", () => {
   it("successfully create a new teams with email and password required", async () => {
     const { Teams } = await Client.loadService(url);
     const res = await Teams.add({ name, root_admin, primary_zipcodes });
@@ -29,7 +28,7 @@ describe("buAPI.Teams.add(options)", () => {
   });
 });
 
-describe("buAPI.Teams.get(options)", () => {
+describe("BasketBall.Teams.get(options)", () => {
   it("successfully create a new teams with email and password required", async () => {
     const { Teams } = await Client.loadService(url);
     const res = await Teams.get({ name, root_admin, primary_zipcodes });
@@ -51,7 +50,7 @@ describe("buAPI.Teams.get(options)", () => {
   });
 });
 
-describe("buAPI.Teams.updateFields(options)", () => {
+describe("BasketBall.Teams.updateFields(options)", () => {
   it("should be able to update any non constant fields", async () => {
     const status = "inactive";
     const profile_image = "http://fake/image.png";
@@ -84,7 +83,7 @@ describe("buAPI.Teams.updateFields(options)", () => {
   });
 });
 
-describe("buAPI.Teams.addTag(options)", () => {
+describe("BasketBall.Teams.addTag(options)", () => {
   it("should successfully add a tag to a user", async () => {
     const { Teams } = await Client.loadService(url);
 
@@ -99,7 +98,7 @@ describe("buAPI.Teams.addTag(options)", () => {
   });
 });
 
-describe("buAPI.Teams.findByTag(options)", () => {
+describe("BasketBall.Teams.findByTag(options)", () => {
   it("should successfully use a tag to a user", async () => {
     const { Teams } = await Client.loadService(url);
 

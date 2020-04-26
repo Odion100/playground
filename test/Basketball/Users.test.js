@@ -1,13 +1,12 @@
 const { expect } = require("chai");
 const { Client } = require("tasksjs-react-client");
-const route = "bu/api";
-const port = 7899;
-const url = `http://localhost:${port}/${route}`;
+
+const { url } = require("./config");
 const tag = "#kjdlsfj";
 const email = `odzysofreezy${parseInt(Math.random() * 1000)}@gmail.com`;
 const password = "passthesenutson";
 
-describe("buAPI.Users.add(options)", () => {
+describe("Basketball.Users.add(options)", () => {
   it("successfully create a new user with email and password required", async () => {
     const { Users } = await Client.loadService(url);
     const res = await Users.add({ email, password });
@@ -19,7 +18,7 @@ describe("buAPI.Users.add(options)", () => {
   });
 });
 
-describe("buAPI.Users.get(options)", () => {
+describe("Basketball.Users.get(options)", () => {
   it("should be able to succesfully retrieve a user using email and password or just id", async () => {
     const { Users } = await Client.loadService(url);
     const res = await Users.get({ email, password });
@@ -35,7 +34,7 @@ describe("buAPI.Users.get(options)", () => {
   });
 });
 
-describe("buAPI.Users.updateField(options)", () => {
+describe("Basketball.Users.updateField(options)", () => {
   it("should be able to succesfully retrieve a user using email and password or just id", async () => {
     const first_name = "Izak";
     const last_name = "Chapper";
@@ -78,7 +77,7 @@ describe("buAPI.Users.updateField(options)", () => {
   });
 });
 
-describe("buAPI.Users.setAccountStatus(options)", () => {
+describe("Basketball.Users.setAccountStatus(options)", () => {
   it("should successfully update a given users accout_status", async () => {
     const { Users } = await Client.loadService(url);
     const { user } = await Users.get({ email, password });
@@ -100,7 +99,7 @@ describe("buAPI.Users.setAccountStatus(options)", () => {
   });
 });
 
-describe("buAPI.Users.addTag(options)", () => {
+describe("Basketball.Users.addTag(options)", () => {
   it("should successfully add a tag to a user", async () => {
     const { Users } = await Client.loadService(url);
     const { user } = await Users.get({ email, password, status: "archived" });
@@ -115,7 +114,7 @@ describe("buAPI.Users.addTag(options)", () => {
   });
 });
 
-describe("buAPI.Users.findByTag(options)", () => {
+describe("Basketball.Users.findByTag(options)", () => {
   it("should successfully add a tag to a user", async () => {
     const { Users } = await Client.loadService(url);
 

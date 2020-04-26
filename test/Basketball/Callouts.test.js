@@ -1,9 +1,8 @@
 const { expect } = require("chai");
 const { Client } = require("tasksjs-react-client");
 const moment = require("moment");
-const route = "bu/api";
-const port = 7899;
-const url = `http://localhost:${port}/${route}`;
+
+const { url } = require("./config");
 
 const creator = "5e987bf158c4e913ee9a3c93";
 const date = moment().toJSON();
@@ -14,7 +13,7 @@ const tag = "ps9";
 let id = "";
 let invite_only = [true, false][parseInt(Math.random() * 1000) % 2];
 
-describe("buAPI.Callouts.add(options)", function () {
+describe("Basketball.Callouts.add(options)", function () {
   it("should successfully create a new Callout", async () => {
     const { Callouts } = await Client.loadService(url);
     const res = await Callouts.add({
@@ -39,7 +38,7 @@ describe("buAPI.Callouts.add(options)", function () {
   });
 });
 
-describe("buAPI.Callouts.get(options)", function () {
+describe("Basketball.Callouts.get(options)", function () {
   it("should successfully return a Callout", async () => {
     const { Callouts } = await Client.loadService(url);
     const res = await Callouts.get({
@@ -63,7 +62,7 @@ describe("buAPI.Callouts.get(options)", function () {
   });
 });
 
-describe("buAPI.Callouts.updateFields(options)", function () {
+describe("Basketball.Callouts.updateFields(options)", function () {
   it("should successfully update a Callout", async () => {
     const { Callouts } = await Client.loadService(url);
     invite_only = !invite_only;
@@ -94,7 +93,7 @@ describe("buAPI.Callouts.updateFields(options)", function () {
   });
 });
 
-describe("buAPI.Callouts.addInvitee(options)", function () {
+describe("Basketball.Callouts.addInvitee(options)", function () {
   it("should successfully add an invitee to a Callout", async () => {
     const { Callouts } = await Client.loadService(url);
 
@@ -123,7 +122,7 @@ describe("buAPI.Callouts.addInvitee(options)", function () {
   });
 });
 
-describe("buAPI.Callouts.removeInvitee(options)", function () {
+describe("Basketball.Callouts.removeInvitee(options)", function () {
   it("should successfully remove an invitee from a Callout", async () => {
     const { Callouts } = await Client.loadService(url);
 
@@ -155,7 +154,7 @@ describe("buAPI.Callouts.removeInvitee(options)", function () {
   });
 });
 
-describe("buAPI.Callouts.addAttendee(options)", function () {
+describe("Basketball.Callouts.addAttendee(options)", function () {
   it("should successfully add an attendee to a Callout", async () => {
     const { Callouts } = await Client.loadService(url);
     await Callouts.addInvitee({ id, invitee });
@@ -188,7 +187,7 @@ describe("buAPI.Callouts.addAttendee(options)", function () {
     else expect(res.updatedCallout).to.have.property("invitees").that.deep.equals([invitee]);
   });
 });
-describe("buAPI.Callouts.removeAttendee(options)", function () {
+describe("Basketball.Callouts.removeAttendee(options)", function () {
   it("should successfully remove an attendee to a Callout", async () => {
     const { Callouts } = await Client.loadService(url);
 
@@ -222,7 +221,7 @@ describe("buAPI.Callouts.removeAttendee(options)", function () {
   });
 });
 
-describe("buAPI.Callouts.addTag(options)", () => {
+describe("Basketball.Callouts.addTag(options)", () => {
   it("should successfully add a tag", async () => {
     const { Callouts } = await Client.loadService(url);
 
@@ -237,7 +236,7 @@ describe("buAPI.Callouts.addTag(options)", () => {
   });
 });
 
-describe("buAPI.Callouts.findByTag(options)", () => {
+describe("Basketball.Callouts.findByTag(options)", () => {
   it("should successfully get an item by tag", async () => {
     const { Callouts } = await Client.loadService(url);
 

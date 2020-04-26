@@ -1,24 +1,22 @@
 const { expect } = require("chai");
 const { Client } = require("tasksjs-react-client");
-const route = "bu/utils";
-const port = 7900;
-const url = `http://localhost:${port}/${route}`;
-//
+
+const { url } = require("./config");
+const Basketball_url = require("../Basketball/config").url;
 const target = "5e8cc4359180142b0605416f";
 let source = "5e8c95739136f2127da83417";
 let _id = "";
+
 beforeAll(async () => {
-  const route = "bu/api";
-  const port = 7899;
-  const url = `http://localhost:${port}/${route}`;
-  const { Tournaments } = await Client.loadService(url);
+  const { Tournaments } = await Client.loadService(Basketball_url);
 
   const name = `TheEventTester-${parseInt(Math.random() * 1000)}`;
   const root_admin = "5e82135037543ac757722727";
   const res = await Tournaments.add({ name, root_admin });
   source = res.newTournament._id;
 });
-describe("buAPI.Invites.add(options)", () => {
+
+describe("Networking.Invites.add(options)", () => {
   it("should be able to successfully create an invite", async () => {
     const { Invites } = await Client.loadService(url);
 
@@ -58,7 +56,7 @@ describe("buAPI.Invites.add(options)", () => {
     );
   });
 });
-describe("buAPI.Invites.get(options)", () => {
+describe("Networking.Invites.get(options)", () => {
   it("should be able to succesfully retrieve an invite using 'source', 'target' or 'id'", async () => {
     const { Invites } = await Client.loadService(url);
 
@@ -78,7 +76,7 @@ describe("buAPI.Invites.get(options)", () => {
   });
 });
 
-describe("buAPI.Invites.markAsViewed(options)", () => {
+describe("Networking.Invites.markAsViewed(options)", () => {
   it("should be able to update invites status, response_message, and response_date", async () => {
     const { Invites } = await Client.loadService(url);
     const id = _id;
@@ -111,7 +109,7 @@ describe("buAPI.Invites.markAsViewed(options)", () => {
   });
 });
 
-describe("buAPI.Invites.cancel(options)", () => {
+describe("Networking.Invites.cancel(options)", () => {
   it("should be able to update invites status, response_message, and response_date", async () => {
     const { Invites } = await Client.loadService(url);
     const id = _id;
@@ -147,7 +145,7 @@ describe("buAPI.Invites.cancel(options)", () => {
   });
 });
 
-describe("buAPI.Invites.resend(options)", () => {
+describe("Networking.Invites.resend(options)", () => {
   it("should be able to update invites status, response_message, and response_date", async () => {
     const { Invites } = await Client.loadService(url);
     const id = _id;
@@ -184,7 +182,7 @@ describe("buAPI.Invites.resend(options)", () => {
   });
 });
 
-describe("buAPI.Invites.sendResponse(options)", () => {
+describe("Networking.Invites.sendResponse(options)", () => {
   it("should be able to update invites status, response_message, and response_date", async () => {
     const { Invites } = await Client.loadService(url);
     const id = _id;
@@ -216,10 +214,8 @@ describe("buAPI.Invites.sendResponse(options)", () => {
         resolve();
       })
     );
-    const buapi_route = "bu/api";
-    const buapi_port = 7899;
-    const buapi_url = `http://localhost:${buapi_port}/${buapi_route}`;
-    const { Tournaments } = await Client.loadService(buapi_url);
+
+    const { Tournaments } = await Client.loadService(Basketball_url);
     await new Promise((resolve) => {
       //console.log(`team_added:${target}`);
       Tournaments.on(`team_added:${target}`, () => console.log("team added<<<-----------"));

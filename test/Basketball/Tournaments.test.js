@@ -1,15 +1,14 @@
 const { expect } = require("chai");
 const { Client } = require("tasksjs-react-client");
 const moment = require("moment");
-const route = "bu/api";
-const port = 7899;
-const url = `http://localhost:${port}/${route}`;
+
+const { url } = require("./config");
 
 const name = `FlyTournament-${parseInt(Math.random() * 1000)}`;
 const root_admin = "5e82135037543ac757722727";
 const primary_zipcodes = ["12133"];
 const tag = "testing123";
-describe("buAPI.Tournaments.add(options)", () => {
+describe("Basketball.Tournaments.add(options)", () => {
   it("successfully create a new tournaments with email and password required", async () => {
     const { Tournaments } = await Client.loadService(url);
     const res = await Tournaments.add({ name, root_admin, primary_zipcodes });
@@ -30,7 +29,7 @@ describe("buAPI.Tournaments.add(options)", () => {
   });
 });
 
-describe("buAPI.Tournaments.get(options)", () => {
+describe("Basketball.Tournaments.get(options)", () => {
   it("should be able to succesfully retrieve a tournaments using email and password or just id", async () => {
     const { Tournaments } = await Client.loadService(url);
     const res = await Tournaments.get({ name });
@@ -42,7 +41,7 @@ describe("buAPI.Tournaments.get(options)", () => {
   });
 });
 
-describe("buAPI.Tournaments.updateField(options)", () => {
+describe("Basketball.Tournaments.updateField(options)", () => {
   it("should be able to update non constant fields", async () => {
     const profile_image = "http://localhost:4402/fake/image";
     const banner_image = "http://localhost:4402/fake/image";
@@ -103,7 +102,7 @@ describe("buAPI.Tournaments.updateField(options)", () => {
   });
 });
 
-describe("buAPI.Tournaments.publish(options)", () => {
+describe("Basketball.Tournaments.publish(options)", () => {
   it("should be able to successfully update a tournament's status to 'published'", async () => {
     const { Tournaments } = await Client.loadService(url);
     const { tournaments } = await Tournaments.get({ name });
@@ -116,7 +115,7 @@ describe("buAPI.Tournaments.publish(options)", () => {
   });
 });
 
-describe("buAPI.Tournaments.cancel(options)", () => {
+describe("Basketball.Tournaments.cancel(options)", () => {
   it("should be able to cancel a tournament giving its id", async () => {
     const { Tournaments } = await Client.loadService(url);
     const { tournaments } = await Tournaments.get({ name });
@@ -129,7 +128,7 @@ describe("buAPI.Tournaments.cancel(options)", () => {
   });
 });
 
-describe("buAPI.Tournaments.reactivate(options)", () => {
+describe("Basketball.Tournaments.reactivate(options)", () => {
   it("should be able to reactivate a tournament giving its id", async () => {
     const { Tournaments } = await Client.loadService(url);
     const { tournaments } = await Tournaments.get({ name });
@@ -142,7 +141,7 @@ describe("buAPI.Tournaments.reactivate(options)", () => {
   });
 });
 
-describe("buAPI.Tournaments.addTag(options)", () => {
+describe("Basketball.Tournaments.addTag(options)", () => {
   it("should successfully add a tag to a user", async () => {
     const { Tournaments } = await Client.loadService(url);
     const { tournaments } = await Tournaments.get({ name });
@@ -157,7 +156,7 @@ describe("buAPI.Tournaments.addTag(options)", () => {
   });
 });
 
-describe("buAPI.Tournaments.findByTag(options)", () => {
+describe("Basketball.Tournaments.findByTag(options)", () => {
   it("should successfully use a tag to a user", async () => {
     const { Tournaments } = await Client.loadService(url);
 

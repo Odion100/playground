@@ -1,8 +1,7 @@
 const { expect } = require("chai");
 const { Client } = require("tasksjs-react-client");
-const route = "bu/api";
-const port = 7899;
-const url = `http://localhost:${port}/${route}`;
+
+const { url } = require("./config");
 const creator = "5e94ce3b0baae3259bf82eec";
 const team1 = "5e94cd8d4973e54eef1f4771";
 const team2 = "5e94cda8f18cd6cf096ce1ce";
@@ -10,7 +9,7 @@ const court = "5e94cdd5382d4e90abf990f4";
 const tag = "testtag";
 let id = "";
 
-describe("buAPI.Games.add(options)", () => {
+describe("Basketball.Games.add(options)", () => {
   it("successfully create a new user with email and password required", async () => {
     const { Games } = await Client.loadService(url);
     const res = await Games.add({
@@ -34,7 +33,7 @@ describe("buAPI.Games.add(options)", () => {
   });
 });
 
-describe("buAPI.Games.get(options)", () => {
+describe("Basketball.Games.get(options)", () => {
   it("successfully create a new user with email and password required", async () => {
     const { Games } = await Client.loadService(url);
 
@@ -58,23 +57,23 @@ describe("buAPI.Games.get(options)", () => {
   });
 });
 
-describe("buAPI.Games.updateFields(options)", () => {
+describe("Basketball.Games.updateFields(options)", () => {
   it("successfully create a new user with email and password required", async () => {
     const { Games } = await Client.loadService(url);
     const team_size = 4;
-    const rounds = 4;
-    const clock = 600000;
-    const overtime_clock = 300000;
+    const total_quarters = 4;
+    const clock_duration = 600000;
+    const overtime_duration = 300000;
     const refs = true;
 
     const res = await Games.updateFields({
       id,
       fields: {
         team_size,
-        clock,
-        overtime_clock,
+        clock_duration,
+        overtime_duration,
         refs,
-        rounds,
+        total_quarters,
       },
     });
     //console.log(res);
@@ -88,13 +87,13 @@ describe("buAPI.Games.updateFields(options)", () => {
     expect(res.updatedGame).to.have.property("team2", team2);
     expect(res.updatedGame).to.have.property("court", court);
     expect(res.updatedGame).to.have.property("team_size", team_size);
-    expect(res.updatedGame).to.have.property("rounds", rounds);
-    expect(res.updatedGame).to.have.property("clock", clock);
-    expect(res.updatedGame).to.have.property("overtime_clock", overtime_clock);
+    expect(res.updatedGame).to.have.property("total_quarters", total_quarters);
+    expect(res.updatedGame).to.have.property("clock_duration", clock_duration);
+    expect(res.updatedGame).to.have.property("overtime_duration", overtime_duration);
     expect(res.updatedGame).to.have.property("refs", refs);
   });
 });
-describe("buAPI.Games.addTag(options)", () => {
+describe("Basketball.Games.addTag(options)", () => {
   it("should successfully add a tag", async () => {
     const { Games } = await Client.loadService(url);
 
@@ -109,7 +108,7 @@ describe("buAPI.Games.addTag(options)", () => {
   });
 });
 
-describe("buAPI.Games.findByTag(options)", () => {
+describe("Basketball.Games.findByTag(options)", () => {
   it("should successfully get an item by tag", async () => {
     const { Games } = await Client.loadService(url);
 
