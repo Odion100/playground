@@ -6,6 +6,7 @@ const creator = "5e94ce3b0baae3259bf82eec";
 const team1 = "5e94cd8d4973e54eef1f4771";
 const team2 = "5e94cda8f18cd6cf096ce1ce";
 const court = "5e94cdd5382d4e90abf990f4";
+const team_size = 1;
 const tag = "testtag";
 let id = "";
 
@@ -16,6 +17,7 @@ describe("Basketball.Games.add(options)", () => {
       creator,
       team1,
       team2,
+      team_size,
       court,
     });
     //console.log(res);

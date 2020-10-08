@@ -63,10 +63,9 @@ describe("GameData.GameState.initialize(options)", () => {
     expect(res.newGameState).to.have.property("team1_assists", 0);
     expect(res.newGameState).to.have.property("team1_fouls", 0);
     expect(res.newGameState)
-      .to.have.property("team1_active")
+      .to.have.property("team1_active_players")
       .that.is.an("array")
       .that.has.a.lengthOf(0);
-    expect(res.newGameState).to.have.property("team1_bench").that.deep.equals([admin1]);
 
     expect(res.newGameState).to.have.property("team2_points", 0);
     expect(res.newGameState).to.have.property("team2_rebounds", 0);
@@ -76,10 +75,9 @@ describe("GameData.GameState.initialize(options)", () => {
     expect(res.newGameState).to.have.property("team2_assists", 0);
     expect(res.newGameState).to.have.property("team2_fouls", 0);
     expect(res.newGameState)
-      .to.have.property("team2_active")
+      .to.have.property("team2_active_players")
       .that.is.an("array")
       .that.has.a.lengthOf(0);
-    expect(res.newGameState).to.have.property("team2_bench").that.deep.equals([admin2]);
   });
 });
 
@@ -111,10 +109,9 @@ describe("GameData.GameState.get(options)", () => {
     expect(res.gameState).to.have.property("team1_assists", 0);
     expect(res.gameState).to.have.property("team1_fouls", 0);
     expect(res.gameState)
-      .to.have.property("team1_active")
+      .to.have.property("team1_active_players")
       .that.is.an("array")
       .that.has.a.lengthOf(0);
-    expect(res.gameState).to.have.property("team1_bench").that.deep.equals([admin1]);
 
     expect(res.gameState).to.have.property("team2_points", 0);
     expect(res.gameState).to.have.property("team2_rebounds", 0);
@@ -124,9 +121,17 @@ describe("GameData.GameState.get(options)", () => {
     expect(res.gameState).to.have.property("team2_assists", 0);
     expect(res.gameState).to.have.property("team2_fouls", 0);
     expect(res.gameState)
-      .to.have.property("team2_active")
+      .to.have.property("team2_active_players")
       .that.is.an("array")
       .that.has.a.lengthOf(0);
-    expect(res.gameState).to.have.property("team2_bench").that.deep.equals([admin2]);
+  });
+});
+
+describe("GameData.GameState.changeLineup(options)", () => {
+  it("should successfully update the gameState active player list for a give team", async () => {
+    const { GameState } = await Client.loadService(url);
+    const { gameState } = await GameState.get({ id: game_id });
+    const res = await GameState.changeLineup({ id: game_id, team_id: gameState.team1 });
+    console.log(res);
   });
 });
