@@ -21,7 +21,7 @@ beforeAll(async () => {
     root_admin: admin2,
   });
 
-  //create fakemock team and game
+  //create mock team and game
   const res3 = await Games.add({
     creator,
     team1: res1.newTeam._id,
@@ -131,7 +131,13 @@ describe("GameData.GameState.changeLineup(options)", () => {
   it("should successfully update the gameState active player list for a give team", async () => {
     const { GameState } = await Client.loadService(url);
     const { gameState } = await GameState.get({ id: game_id });
-    const res = await GameState.changeLineup({ id: game_id, team_id: gameState.team1 });
+    const res = await GameState.changeLineup({
+      id: game_id,
+      team_id: gameState.team1,
+      remove_players: [],
+      insert_players: [admin1],
+    });
+
     console.log(res);
   });
 });
