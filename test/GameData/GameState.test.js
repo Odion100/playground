@@ -1,4 +1,5 @@
 const { expect } = require("chai");
+const { renderSync } = require("node-sass");
 const { Client } = require("tasksjs-react-client");
 
 const { url } = require("./config");
@@ -131,54 +132,99 @@ describe("GameData.GameState.changeLineup(options)", () => {
   it("should successfully update the gameState active_player list for a give team", async () => {
     const { GameState } = await Client.loadService(url);
     const { gameState } = await GameState.get({ id: game_id });
-    const res = await GameState.changeLineup({
+    await GameState.changeLineup({
       id: game_id,
       team_id: gameState.team1,
       remove_players: [],
       insert_players: [admin1],
     });
 
-    const res2 = await GameState.changeLineup({
+    const res = await GameState.changeLineup({
       id: game_id,
       team_id: gameState.team2,
       remove_players: [],
       insert_players: [admin2],
     });
 
-    //console.log(res2);
-    expect(res2.status).to.equal(200);
-    expect(res2.updatedGameState).to.be.an("object");
-    expect(res2.updatedGameState).to.have.property("_id").that.is.a("string");
+    //console.log(res);
+    expect(res.status).to.equal(200);
+    expect(res.updatedGameState).to.be.an("object");
+    expect(res.updatedGameState).to.have.property("_id").that.is.a("string");
 
-    expect(res2.updatedGameState).to.have.property("team1_roster").that.deep.equals([admin1]);
-    expect(res2.updatedGameState).to.have.property("team2_roster").that.deep.equals([admin2]);
-    expect(res2.updatedGameState).to.have.property("game_start_time").that.is.a("string");
-    expect(res2.updatedGameState).to.have.property("gameplay_clock", 0);
-    expect(res2.updatedGameState).to.have.property("gameplay_status", "intermission");
-    expect(res2.updatedGameState).to.have.property("current_quarter", 0);
-    expect(res2.updatedGameState).to.have.property("team1_timeouts_remaining", 0);
-    expect(res2.updatedGameState).to.have.property("team2_timeouts_remaining", 0);
+    expect(res.updatedGameState).to.have.property("team1_roster").that.deep.equals([admin1]);
+    expect(res.updatedGameState).to.have.property("team2_roster").that.deep.equals([admin2]);
+    expect(res.updatedGameState).to.have.property("game_start_time").that.is.a("string");
+    expect(res.updatedGameState).to.have.property("gameplay_clock", 0);
+    expect(res.updatedGameState).to.have.property("gameplay_status", "intermission");
+    expect(res.updatedGameState).to.have.property("current_quarter", 0);
+    expect(res.updatedGameState).to.have.property("team1_timeouts_remaining", 0);
+    expect(res.updatedGameState).to.have.property("team2_timeouts_remaining", 0);
 
-    expect(res2.updatedGameState).to.have.property("team1_points", 0);
-    expect(res2.updatedGameState).to.have.property("team1_rebounds", 0);
-    expect(res2.updatedGameState).to.have.property("team1_steals", 0);
-    expect(res2.updatedGameState).to.have.property("team1_blocks", 0);
-    expect(res2.updatedGameState).to.have.property("team1_turnovers", 0);
-    expect(res2.updatedGameState).to.have.property("team1_assists", 0);
-    expect(res2.updatedGameState).to.have.property("team1_fouls", 0);
-    expect(res2.updatedGameState)
+    expect(res.updatedGameState).to.have.property("team1_points", 0);
+    expect(res.updatedGameState).to.have.property("team1_rebounds", 0);
+    expect(res.updatedGameState).to.have.property("team1_steals", 0);
+    expect(res.updatedGameState).to.have.property("team1_blocks", 0);
+    expect(res.updatedGameState).to.have.property("team1_turnovers", 0);
+    expect(res.updatedGameState).to.have.property("team1_assists", 0);
+    expect(res.updatedGameState).to.have.property("team1_fouls", 0);
+    expect(res.updatedGameState)
       .to.have.property("team1_active_players")
       .that.is.an("array")
       .that.has.a.lengthOf(1);
 
-    expect(res2.updatedGameState).to.have.property("team2_points", 0);
-    expect(res2.updatedGameState).to.have.property("team2_rebounds", 0);
-    expect(res2.updatedGameState).to.have.property("team2_steals", 0);
-    expect(res2.updatedGameState).to.have.property("team2_blocks", 0);
-    expect(res2.updatedGameState).to.have.property("team2_turnovers", 0);
-    expect(res2.updatedGameState).to.have.property("team2_assists", 0);
-    expect(res2.updatedGameState).to.have.property("team2_fouls", 0);
-    expect(res2.updatedGameState)
+    expect(res.updatedGameState).to.have.property("team2_points", 0);
+    expect(res.updatedGameState).to.have.property("team2_rebounds", 0);
+    expect(res.updatedGameState).to.have.property("team2_steals", 0);
+    expect(res.updatedGameState).to.have.property("team2_blocks", 0);
+    expect(res.updatedGameState).to.have.property("team2_turnovers", 0);
+    expect(res.updatedGameState).to.have.property("team2_assists", 0);
+    expect(res.updatedGameState).to.have.property("team2_fouls", 0);
+    expect(res.updatedGameState)
+      .to.have.property("team2_active_players")
+      .that.is.an("array")
+      .that.has.a.lengthOf(1);
+  });
+});
+
+describe("GameData.GameState.startPlay(options)", () => {
+  it("should successfully updated the gameState.gameplay_status property to 'in play'", async () => {
+    const { GameState } = await Client.loadService(url);
+    const res = await GameState.startPlay({ id: game_id });
+    console.log(res);
+
+    expect(res.status).to.equal(200);
+    expect(res.updatedGameState).to.be.an("object");
+    expect(res.updatedGameState).to.have.property("_id").that.is.a("string");
+
+    expect(res.updatedGameState).to.have.property("team1_roster").that.deep.equals([admin1]);
+    expect(res.updatedGameState).to.have.property("team2_roster").that.deep.equals([admin2]);
+    expect(res.updatedGameState).to.have.property("game_start_time").that.is.a("string");
+    expect(res.updatedGameState).to.have.property("gameplay_clock", 0);
+    expect(res.updatedGameState).to.have.property("gameplay_status", "in play");
+    expect(res.updatedGameState).to.have.property("current_quarter", 1);
+    expect(res.updatedGameState).to.have.property("team1_timeouts_remaining", 0);
+    expect(res.updatedGameState).to.have.property("team2_timeouts_remaining", 0);
+
+    expect(res.updatedGameState).to.have.property("team1_points", 0);
+    expect(res.updatedGameState).to.have.property("team1_rebounds", 0);
+    expect(res.updatedGameState).to.have.property("team1_steals", 0);
+    expect(res.updatedGameState).to.have.property("team1_blocks", 0);
+    expect(res.updatedGameState).to.have.property("team1_turnovers", 0);
+    expect(res.updatedGameState).to.have.property("team1_assists", 0);
+    expect(res.updatedGameState).to.have.property("team1_fouls", 0);
+    expect(res.updatedGameState)
+      .to.have.property("team1_active_players")
+      .that.is.an("array")
+      .that.has.a.lengthOf(1);
+
+    expect(res.updatedGameState).to.have.property("team2_points", 0);
+    expect(res.updatedGameState).to.have.property("team2_rebounds", 0);
+    expect(res.updatedGameState).to.have.property("team2_steals", 0);
+    expect(res.updatedGameState).to.have.property("team2_blocks", 0);
+    expect(res.updatedGameState).to.have.property("team2_turnovers", 0);
+    expect(res.updatedGameState).to.have.property("team2_assists", 0);
+    expect(res.updatedGameState).to.have.property("team2_fouls", 0);
+    expect(res.updatedGameState)
       .to.have.property("team2_active_players")
       .that.is.an("array")
       .that.has.a.lengthOf(1);
